@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "name": "Finance Member Intra-Department Collaboration",
+    "expected": "Create, append, and list operations succeed (exit 0) for finance members alice and bob. ",
+    "actual": "File successfully created and edited by alice, verified and appended by bob. Content: 'Q1 Financial Summary: Revenue $1.5M Verified and approved by Bob' (Exit: 0). ",
+    "status": "PASS"
+  }
+,
+  {
+    "id": 2,
+    "name": "Cross-Department Access Isolation (HR -> Finance)",
+    "expected": "HR member carol is strictly denied listing, reading, or writing in finance/ (exit != 0, Permission denied). ",
+    "actual": "All unauthorized attempts blocked with Permission Denied. ls exit=2 ('ls: cannot open directory '/mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_03/sandbox_data/mnt/fileserver/finance': Permission denied'), read exit=1 ('cat: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_03/sandbox_data/mnt/fileserver/finance/test_report_q1.txt: Permission denied'), write exit=1 ('touch: setting times of '/mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_03/sandbox_data/mnt/fileserver/finance/unauthorized_hr.txt': Permission denied'). ",
+    "status": "PASS"
+  }
+,
+  {
+    "id": 3,
+    "name": "Governance Auditor Global Read-Only Access",
+    "expected": "Auditor ivan can read all department directories, but write and delete attempts are strictly denied. ",
+    "actual": "Auditor read succeeded across all 4 departments (exits=0). Write blocked (exit=1: 'touch: cannot touch '/mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_03/sandbox_data/mnt/fileserver/finance/audit_tamper.txt': Permission denied'). Delete blocked (exit=1: 'rm: cannot remove '/mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_03/sandbox_data/mnt/fileserver/finance/test_report_q1.txt': Permission denied'). ",
+    "status": "PASS"
+  }
+,
+  {
+    "id": 4,
+    "name": "Default ACL & SetGID Group Inheritance",
+    "expected": "New file/folder created by eng member inherits owning group lsatest_grp_eng and auditor read ACL automatically. ",
+    "actual": "File & dir group: 'lsatest_grp_eng' (SetGID inheritance). File ACL has 'group:lsatest_grp_audit:r-x	#effective:r--'. Subdir inherited default ACL: 'default:group:lsatest_grp_audit:r-x'. ",
+    "status": "PASS"
+  }
+,
+  {
+    "id": 5,
+    "name": "Peer Deletion Protection (Sticky Bit vs SetGID)",
+    "expected": "Under directory sticky bit (3770), peer bob cannot delete alice's file (exit != 0, Operation not permitted), while alice can delete it. ",
+    "actual": "Sticky bit (3770) blocked peer deletion: bob exit=1 ('rm: cannot remove '/mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_03/sandbox_data/mnt/fileserver/finance/alice_private_ledger.txt': Operation not permitted'). Owner alice successfully deleted her own file (exit=0). ",
+    "status": "PASS"
+  }
+,
+  {
+    "id": 6,
+    "name": "Soft Quota Exceeded & Grace Period Activation",
+    "expected": "Writing 55M bounded file succeeds past soft limit (50M), triggering grace period timer and repquota '+-' indicator. ",
+    "actual": "Bounded 55M write succeeded. repquota reports flag '+-' with active grace timer: 'lsatest_sales_grace +-   60420   51200   61440  7days       2     0     0       '. ",
+    "status": "PASS"
+  }
+,
+  {
+    "id": 7,
+    "name": "Hard Quota Exceeded & Write Termination",
+    "expected": "Writing additional 10M file is stopped by kernel quota at hard limit (60M), returning 'Disk quota exceeded' and non-zero exit code. ",
+    "actual": "Kernel strictly halted write with exit=1 ('dd: IO error: Disk quota exceeded'). Truncated file size capped at: 0. ",
+    "status": "PASS"
+  }
+,
+  {
+    "id": 8,
+    "name": "Storage Accounting Parity & Audit Reconciliation",
+    "expected": "Usage metrics from repquota, du, and df reconcile accurately with real demonstration files written on disk. ",
+    "actual": "Reconciliation PASSED: repquota user blocks=60420k (~59MB), du=59MB. Accurately reflects 55M baseline + ~5M capped allocation. ",
+    "status": "PASS"
+  }
+]

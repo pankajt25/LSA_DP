@@ -1,0 +1,977 @@
+[2026-10-10 19:34:22] [INFO] ======================================================================
+[2026-10-10 19:34:23] [INFO] Phase 0: Initializing Dedicated Backup Storage Infrastructure
+[2026-10-10 19:34:23] [INFO] ======================================================================
+[2026-10-10 19:34:23] [INFO] [Step 1/4] Creating 1 GiB sparse image file: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/backup_disk.img
+[2026-10-10 19:34:24] [SUCCESS] Sparse image created: 1.0G /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/backup_disk.img
+[2026-10-10 19:34:25] [INFO] [Step 2/4] Attaching loopback device to /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/backup_disk.img...
+[2026-10-10 19:34:25] [INFO] Allocated loop device: /dev/loop0
+[2026-10-10 19:34:25] [INFO] Verifying device-to-file mapping via losetup -j...
+[2026-10-10 19:34:26] [SUCCESS] Device verification PASSED: /dev/loop0 safely mapped to /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/backup_disk.img
+[2026-10-10 19:34:26] [INFO] ------------------------------------------------------------------
+[2026-10-10 19:34:26] [INFO] Running Optional Stretch: LVM Physical Volume & Elastic Volume Demo
+[2026-10-10 19:34:26] [INFO] ------------------------------------------------------------------
+[2026-10-10 19:34:26] [INFO] Initializing Physical Volume (PV) on /dev/loop0...
+[2026-10-10 19:34:27] [INFO] Creating Volume Group 'backup_vg'...
+[2026-10-10 19:34:27] [INFO] Creating Logical Volume 'backup_lv' (Initial size: 500M)...
+[2026-10-10 19:34:28] [INFO] Formatting /dev/backup_vg/backup_lv with ext4...
+[2026-10-10 19:34:38] [SUCCESS] Mounted initial LVM volume at /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo_mount:
+[2026-10-10 19:34:39] [INFO] Demonstrating Online LVM Elastic Expansion (+300M)...
+[2026-10-10 19:34:44] [SUCCESS] Online expansion complete. Updated filesystem capacity:
+[2026-10-10 19:34:44] [INFO] Cleaning up LVM stretch demo to return to standard loop ext4 structure...
+[2026-10-10 19:34:46] [SUCCESS] LVM Stretch Demonstration concluded successfully.
+[2026-10-10 19:34:47] [INFO] [Step 3/4] Formatting ext4 filesystem on verified device /dev/loop0...
+[2026-10-10 19:34:56] [SUCCESS] ext4 filesystem initialized on /dev/loop0
+[2026-10-10 19:34:56] [INFO] [Step 4/4] Mounting /dev/loop0 at /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo_mount...
+[2026-10-10 19:34:56] [SUCCESS] Repository successfully mounted and linked: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo -> /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo_mount/repo
+[2026-10-10 19:34:56] [INFO] ======================================================================
+[2026-10-10 19:34:56] [INFO] Phase 0 Verification Evidence (Storage Implementation)
+[2026-10-10 19:34:56] [INFO] ======================================================================
+[2026-10-10 19:34:56] [INFO] ======================================================================
+[2026-10-10 19:34:56] [SUCCESS] Phase 0 Storage Volume Setup Completed Successfully.
+[2026-10-10 19:35:12] [INFO] ======================================================================
+[2026-10-10 19:35:12] [INFO] Phase 1: Generating Fictional Department Dataset (Demonstration Data)
+[2026-10-10 19:35:12] [INFO] ======================================================================
+[2026-10-10 19:35:13] [INFO] Populating Finance department files...
+[2026-10-10 19:35:15] [INFO] Populating Human Resources department files...
+[2026-10-10 19:35:15] [INFO] Populating Engineering department files...
+[2026-10-10 19:35:16] [INFO] Populating Sales department files...
+[2026-10-10 19:35:18] [SUCCESS] Seeding complete: Created 49 fictional enterprise files across 4 departments.
+[2026-10-10 19:35:18] [SUCCESS] Total Source Dataset Size: 18.45 KB
+[2026-10-10 19:35:32] [INFO] ======================================================================
+[2026-10-10 19:35:32] [INFO] Initiating NovaTech Centralized FULL Backup (Level 0 Baseline)
+[2026-10-10 19:35:32] [INFO] ======================================================================
+[2026-10-10 19:35:34] [INFO] Source validated: 49 files detected across department shares.
+[2026-10-10 19:35:34] [INFO] Repository storage check: 927680 KB free space available (threshold: 20480 KB).
+[2026-10-10 19:35:35] [INFO] Target Archive: full_20261010_193535.tar.gz
+[2026-10-10 19:35:35] [INFO] Snapshot File : /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/active.snar
+[2026-10-10 19:35:35] [INFO] Executing GNU tar Level 0 baseline snapshot...
+[2026-10-10 19:35:41] [INFO] Generating SHA-256 cryptographic checksum manifest...
+[2026-10-10 19:35:42] [INFO] Verifying archive integrity with sha256sum -c and tar -tzf...
+[2026-10-10 19:35:42] [SUCCESS] Integrity verification PASSED: SHA-256 and tar decompression valid.
+[2026-10-10 19:35:43] [SUCCESS] FULL backup completed successfully in 6s.
+[2026-10-10 19:35:43] [SUCCESS] Archive: full_20261010_193535.tar.gz | Size: 13.85 KB | SHA256: 341f675d1cd0517e...
+[2026-10-10 19:35:54] [INFO] ======================================================================
+[2026-10-10 19:35:54] [INFO] Phase 1: Mutating Departmental Data (Stage 1)
+[2026-10-10 19:35:55] [INFO] ======================================================================
+[2026-10-10 19:35:55] [INFO] Applying Mutation Set 1 (for Incremental Backup 1)...
+[2026-10-10 19:35:55] [INFO]   [ADD] finance/audit_addendum_q1.csv
+[2026-10-10 19:35:55] [INFO]   [ADD] engineering/hotfix_release_notes_2.4.1.md
+[2026-10-10 19:35:56] [INFO]   [MODIFY] sales/crm_leads_enterprise_q1.csv
+[2026-10-10 19:35:56] [INFO]   [MODIFY] hr/employee_directory.csv
+[2026-10-10 19:35:56] [INFO]   [DELETE] sales/win_loss_analysis_q2.csv
+[2026-10-10 19:35:56] [SUCCESS] Mutation Stage 1 applied cleanly: 2 added, 2 modified, 1 deleted.
+[2026-10-10 19:35:56] [INFO] ======================================================================
+[2026-10-10 19:35:57] [INFO] Initiating NovaTech Centralized INCREMENTAL Backup
+[2026-10-10 19:35:57] [INFO] ======================================================================
+[2026-10-10 19:35:57] [ERROR] MANDATORY BASELINE MISSING: No full backup found in repository.
+[2026-10-10 19:35:57] [ERROR] Active snapshot manifest (/mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/active.snar) not initialized.
+[2026-10-10 19:35:57] [ERROR] Incremental backup refused. You must execute backup_full.sh before running incrementals.
+[2026-10-10 19:37:17] [INFO] ======================================================================
+[2026-10-10 19:37:17] [INFO] Initiating NovaTech Centralized INCREMENTAL Backup
+[2026-10-10 19:37:17] [INFO] ======================================================================
+[2026-10-10 19:37:18] [INFO] Baseline full backup verified: full_20261010_193535.tar.gz
+[2026-10-10 19:37:18] [INFO] Active snapshot file detected: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/active.snar
+[2026-10-10 19:37:18] [INFO] Repository storage check: 927648 KB free space available (threshold: 10240 KB).
+[2026-10-10 19:37:18] [INFO] Target Archive: incr_20261010_193718.tar.gz
+[2026-10-10 19:37:18] [INFO] Executing GNU tar incremental snapshot against /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/active.snar...
+[2026-10-10 19:37:19] [INFO] Generating SHA-256 cryptographic checksum manifest...
+[2026-10-10 19:37:19] [INFO] Verifying archive integrity with sha256sum -c and tar -tzf...
+[2026-10-10 19:37:20] [SUCCESS] Integrity verification PASSED: SHA-256 and tar decompression valid.
+[2026-10-10 19:37:20] [SUCCESS] INCREMENTAL backup completed successfully in 1s.
+[2026-10-10 19:37:20] [SUCCESS] Archive: incr_20261010_193718.tar.gz | Size: 2.06 KB | SHA256: fa1890102723a3dd... (Parent: full_20261010_193535.tar.gz)
+[2026-10-10 19:37:26] [INFO] ======================================================================
+[2026-10-10 19:37:26] [INFO] Running NovaTech Backup Integrity Verification
+[2026-10-10 19:37:27] [INFO] ======================================================================
+[2026-10-10 19:37:27] [INFO] Evaluating 2 archive(s) for cryptographic and structural validity...
+[2026-10-10 19:37:27] [INFO] VERIFICATION PASS: full_20261010_193535.tar.gz (SHA256: VALID, TAR: VALID)
+[2026-10-10 19:37:27] [INFO] VERIFICATION PASS: incr_20261010_193718.tar.gz (SHA256: VALID, TAR: VALID)
+[2026-10-10 19:37:28] [INFO] Verification Summary: Total: 2 | Passed: 2 | Failed: 0
+[2026-10-10 19:37:28] [SUCCESS] Integrity audit completed: ALL archives verified intact and authentic [OK].
+[2026-10-10 19:37:49] [INFO] ======================================================================
+[2026-10-10 19:37:49] [INFO] Running NovaTech Backup Retention Policy Enforcement
+[2026-10-10 19:37:49] [INFO] Policy: Retain the 2 most recent Full backups and all associated incrementals
+[2026-10-10 19:37:49] [INFO] Mode  : DRY-RUN (Simulated - No Deletions)
+[2026-10-10 19:37:49] [INFO] ======================================================================
+[2026-10-10 19:37:50] [INFO] Repository scan detected 1 full backup archive(s).
+[2026-10-10 19:37:50] [INFO] Repository full backup count (1) is within retention limit (max 2 fulls).
+[2026-10-10 19:37:50] [SUCCESS] No full or incremental archives require pruning at this time.
+[2026-10-10 19:37:57] [INFO] ======================================================================
+[2026-10-10 19:37:57] [INFO] Initiating NovaTech Centralized Recovery & Restoration Engine
+[2026-10-10 19:37:57] [INFO] Target Directory: sandbox_data/restore_target
+[2026-10-10 19:37:57] [INFO] ======================================================================
+[2026-10-10 19:37:57] [INFO] Identified Baseline Full Backup: full_20261010_193535.tar.gz (Timestamp: 20261010_193535)
+[2026-10-10 19:37:57] [INFO] Identified 1 incremental backup archive(s) in recovery chain.
+[2026-10-10 19:37:57] [INFO] Executing Pre-Flight Cryptographic Checksum Verification...
+[2026-10-10 19:37:58] [INFO]   Verifying: full_20261010_193535.tar.gz...
+[2026-10-10 19:37:58] [INFO]   Verifying: incr_20261010_193718.tar.gz...
+[2026-10-10 19:37:58] [SUCCESS] Pre-Flight Verification PASSED: All 2 archive(s) verified authentic.
+[2026-10-10 19:37:58] [INFO] Stage 1: Extracting Full Baseline (full_20261010_193535.tar.gz) into target sandbox...
+[2026-10-10 19:38:02] [SUCCESS] Full baseline restored successfully.
+[2026-10-10 19:38:02] [INFO] Stage 2: Replaying 1 incremental archive(s)...
+[2026-10-10 19:38:03] [INFO]   Replaying [1/1]: incr_20261010_193718.tar.gz...
+[2026-10-10 19:38:04] [SUCCESS] All incremental revisions replayed successfully.
+[2026-10-10 19:38:05] [SUCCESS] Point-in-Time Restoration Complete in 6s.
+[2026-10-10 19:38:05] [SUCCESS] Target Directory : sandbox_data/restore_target
+[2026-10-10 19:38:05] [SUCCESS] Restored Files   : 50 files (18.94 KB)
+[2026-10-10 19:38:43] [INFO] ======================================================================
+[2026-10-10 19:38:43] [INFO] Executing NovaTech Disaster Recovery Verification Suite (CO4 Core)
+[2026-10-10 19:38:43] [INFO] ======================================================================
+[2026-10-10 19:38:44] [INFO] [Step 1/6] Executing Baseline FULL Backup...
+[2026-10-10 19:38:44] [INFO] ======================================================================
+[2026-10-10 19:38:44] [INFO] Initiating NovaTech Centralized FULL Backup (Level 0 Baseline)
+[2026-10-10 19:38:44] [INFO] ======================================================================
+[2026-10-10 19:38:45] [INFO] Source validated: 50 files detected across department shares.
+[2026-10-10 19:38:45] [INFO] Repository storage check: 927636 KB free space available (threshold: 20480 KB).
+[2026-10-10 19:38:45] [INFO] Target Archive: full_20261010_193845.tar.gz
+[2026-10-10 19:38:45] [INFO] Snapshot File : /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/active.snar
+[2026-10-10 19:38:45] [INFO] Executing GNU tar Level 0 baseline snapshot...
+[2026-10-10 19:38:47] [INFO] Generating SHA-256 cryptographic checksum manifest...
+[2026-10-10 19:38:47] [INFO] Verifying archive integrity with sha256sum -c and tar -tzf...
+[2026-10-10 19:38:47] [SUCCESS] Integrity verification PASSED: SHA-256 and tar decompression valid.
+[2026-10-10 19:38:47] [SUCCESS] FULL backup completed successfully in 2s.
+[2026-10-10 19:38:48] [SUCCESS] Archive: full_20261010_193845.tar.gz | Size: 14.26 KB | SHA256: 088fe89092cad81a...
+[2026-10-10 19:38:48] [INFO] [Step 2/6] Applying Data Mutation Set 1 & Creating Incremental 1...
+[2026-10-10 19:38:48] [INFO] ======================================================================
+[2026-10-10 19:38:48] [INFO] Phase 1: Mutating Departmental Data (Stage 1)
+[2026-10-10 19:38:48] [INFO] ======================================================================
+[2026-10-10 19:38:48] [INFO] Applying Mutation Set 1 (for Incremental Backup 1)...
+[2026-10-10 19:38:48] [INFO]   [ADD] finance/audit_addendum_q1.csv
+[2026-10-10 19:38:48] [INFO]   [ADD] engineering/hotfix_release_notes_2.4.1.md
+[2026-10-10 19:38:49] [INFO]   [MODIFY] sales/crm_leads_enterprise_q1.csv
+[2026-10-10 19:38:49] [INFO]   [MODIFY] hr/employee_directory.csv
+[2026-10-10 19:38:50] [INFO]   [DELETE] sales/win_loss_analysis_q2.csv
+[2026-10-10 19:38:50] [SUCCESS] Mutation Stage 1 applied cleanly: 2 added, 2 modified, 1 deleted.
+[2026-10-10 19:38:50] [INFO] ======================================================================
+[2026-10-10 19:38:50] [INFO] Initiating NovaTech Centralized INCREMENTAL Backup
+[2026-10-10 19:38:50] [INFO] ======================================================================
+[2026-10-10 19:38:51] [INFO] Baseline full backup verified: full_20261010_193845.tar.gz
+[2026-10-10 19:38:51] [INFO] Active snapshot file detected: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/active.snar
+[2026-10-10 19:38:51] [INFO] Repository storage check: 927608 KB free space available (threshold: 10240 KB).
+[2026-10-10 19:38:51] [INFO] Target Archive: incr_20261010_193851.tar.gz
+[2026-10-10 19:38:51] [INFO] Executing GNU tar incremental snapshot against /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/active.snar...
+[2026-10-10 19:38:52] [INFO] Generating SHA-256 cryptographic checksum manifest...
+[2026-10-10 19:38:52] [INFO] Verifying archive integrity with sha256sum -c and tar -tzf...
+[2026-10-10 19:38:52] [SUCCESS] Integrity verification PASSED: SHA-256 and tar decompression valid.
+[2026-10-10 19:38:53] [SUCCESS] INCREMENTAL backup completed successfully in 1s.
+[2026-10-10 19:38:53] [SUCCESS] Archive: incr_20261010_193851.tar.gz | Size: 2.08 KB | SHA256: 3be15f9d7aaff47c... (Parent: full_20261010_193845.tar.gz)
+[2026-10-10 19:38:53] [INFO] [Step 3/6] Applying Data Mutation Set 2 & Creating Incremental 2...
+[2026-10-10 19:38:53] [INFO] ======================================================================
+[2026-10-10 19:38:53] [INFO] Phase 1: Mutating Departmental Data (Stage 2)
+[2026-10-10 19:38:54] [INFO] ======================================================================
+[2026-10-10 19:38:54] [INFO] Applying Mutation Set 2 (for Incremental Backup 2)...
+[2026-10-10 19:38:54] [INFO]   [ADD] hr/wellness_initiative_feedback.csv
+[2026-10-10 19:38:54] [INFO]   [ADD] engineering/api_gateway_routes.json
+[2026-10-10 19:38:54] [INFO]   [MODIFY] engineering/architecture_decision_records.md
+[2026-10-10 19:38:55] [INFO]   [MODIFY] finance/petty_cash_disbursements.csv
+[2026-10-10 19:38:55] [INFO]   [DELETE] finance/investor_deck_notes.md
+[2026-10-10 19:38:55] [SUCCESS] Mutation Stage 2 applied cleanly: 2 added, 2 modified, 1 deleted.
+[2026-10-10 19:38:56] [INFO] ======================================================================
+[2026-10-10 19:38:56] [INFO] Initiating NovaTech Centralized INCREMENTAL Backup
+[2026-10-10 19:38:56] [INFO] ======================================================================
+[2026-10-10 19:38:56] [INFO] Baseline full backup verified: full_20261010_193845.tar.gz
+[2026-10-10 19:38:56] [INFO] Active snapshot file detected: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/active.snar
+[2026-10-10 19:38:56] [INFO] Repository storage check: 927596 KB free space available (threshold: 10240 KB).
+[2026-10-10 19:38:56] [INFO] Target Archive: incr_20261010_193856.tar.gz
+[2026-10-10 19:38:57] [INFO] Executing GNU tar incremental snapshot against /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/active.snar...
+[2026-10-10 19:38:57] [INFO] Generating SHA-256 cryptographic checksum manifest...
+[2026-10-10 19:38:57] [INFO] Verifying archive integrity with sha256sum -c and tar -tzf...
+[2026-10-10 19:38:58] [SUCCESS] Integrity verification PASSED: SHA-256 and tar decompression valid.
+[2026-10-10 19:38:58] [SUCCESS] INCREMENTAL backup completed successfully in 1s.
+[2026-10-10 19:38:58] [SUCCESS] Archive: incr_20261010_193856.tar.gz | Size: 2.00 KB | SHA256: c19dff25602f78e0... (Parent: full_20261010_193845.tar.gz)
+[2026-10-10 19:38:58] [INFO] [Step 4/6] Generating Pre-Disaster Cryptographic Manifest of Source...
+[2026-10-10 19:39:00] [SUCCESS] Pre-disaster snapshot indexed: 51 files recorded.
+[2026-10-10 19:39:00] [INFO] [Step 5/6] Simulating Catastrophic Data Loss in Source Sandbox...
+[2026-10-10 19:39:00] [WARN]   [DISASTER SIMULATION] Purging entire department share: source/sales/
+[2026-10-10 19:39:00] [WARN]   [DISASTER SIMULATION] Corrupting critical technical asset: source/engineering/architecture_decision_records.md
+[2026-10-10 19:39:00] [WARN] Disaster effect: File count dropped from 51 to 40 files.
+[2026-10-10 19:39:01] [INFO] [Step 6/6] Executing Full Chain Disaster Restoration...
+[2026-10-10 19:39:02] [INFO] ======================================================================
+[2026-10-10 19:39:02] [INFO] Initiating NovaTech Centralized Recovery & Restoration Engine
+[2026-10-10 19:39:02] [INFO] Target Directory: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/restore_target
+[2026-10-10 19:39:02] [INFO] ======================================================================
+[2026-10-10 19:39:02] [INFO] Identified Baseline Full Backup: full_20261010_193845.tar.gz (Timestamp: 20261010_193845)
+[2026-10-10 19:39:02] [INFO] Identified 2 incremental backup archive(s) in recovery chain.
+[2026-10-10 19:39:02] [INFO] Executing Pre-Flight Cryptographic Checksum Verification...
+[2026-10-10 19:39:02] [INFO]   Verifying: full_20261010_193845.tar.gz...
+[2026-10-10 19:39:03] [INFO]   Verifying: incr_20261010_193851.tar.gz...
+[2026-10-10 19:39:03] [INFO]   Verifying: incr_20261010_193856.tar.gz...
+[2026-10-10 19:39:03] [SUCCESS] Pre-Flight Verification PASSED: All 3 archive(s) verified authentic.
+[2026-10-10 19:39:04] [INFO] Stage 1: Extracting Full Baseline (full_20261010_193845.tar.gz) into target sandbox...
+[2026-10-10 19:39:06] [SUCCESS] Full baseline restored successfully.
+[2026-10-10 19:39:06] [INFO] Stage 2: Replaying 2 incremental archive(s)...
+[2026-10-10 19:39:06] [INFO]   Replaying [1/2]: incr_20261010_193851.tar.gz...
+[2026-10-10 19:39:07] [INFO]   Replaying [2/2]: incr_20261010_193856.tar.gz...
+[2026-10-10 19:39:08] [SUCCESS] All incremental revisions replayed successfully.
+[2026-10-10 19:39:09] [SUCCESS] Point-in-Time Restoration Complete in 4s.
+[2026-10-10 19:39:09] [SUCCESS] Target Directory : /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/restore_target
+[2026-10-10 19:39:09] [SUCCESS] Restored Files   : 51 files (19.78 KB)
+[2026-10-10 19:39:09] [INFO] Analyzing restored dataset against pre-disaster cryptographic manifest...
+[2026-10-10 19:39:19] [INFO] Directory level check: Restored structure is healthy.
+[2026-10-10 19:39:19] [SUCCESS] RECOVERY AUDIT VERDICT: PASS (100% Data Fidelity Preserved)
+[2026-10-10 19:39:20] [INFO] ------------------------------------------------------------------
+[2026-10-10 19:39:20] [INFO] Demonstrating Resilient Detection of Corrupted Archive
+[2026-10-10 19:39:20] [INFO] ------------------------------------------------------------------
+[2026-10-10 19:39:20] [INFO] Creating test clone of archive: incr_20261010_193856.tar.gz -> corrupt_tamper_demo.tar.gz
+[2026-10-10 19:39:20] [INFO] Injecting deliberate bit-flip corruption at offset 128 (dd conv=notrunc)...
+[2026-10-10 19:39:21] [INFO] Running verify_backup.sh against tampered archive...
+[2026-10-10 19:39:21] [INFO] ======================================================================
+[2026-10-10 19:39:21] [INFO] Running NovaTech Backup Integrity Verification
+[2026-10-10 19:39:21] [INFO] ======================================================================
+[2026-10-10 19:39:21] [INFO] Evaluating 1 archive(s) for cryptographic and structural validity...
+[2026-10-10 19:39:21] [ERROR] VERIFICATION FAILED: corrupt_tamper_demo.tar.gz (SHA256: MISMATCH, TAR: CORRUPT)
+[2026-10-10 19:39:21] [INFO] Verification Summary: Total: 1 | Passed: 0 | Failed: 1
+[2026-10-10 19:39:21] [ERROR] Integrity audit completed with ERRORS: 1 archive(s) CORRUPT.
+[2026-10-10 19:39:21] [SUCCESS] CORRUPTION DETECTED PROMPTLY: Verification engine blocked corrupted archive [OK].
+[2026-10-10 19:39:22] [INFO] Corrupted demo archive safely cleaned up.
+[2026-10-10 19:39:35] [INFO] ======================================================================
+[2026-10-10 19:39:35] [INFO] Phase 4: Installing Scheduled Backup Automation (cron)
+[2026-10-10 19:39:35] [INFO] ======================================================================
+[2026-10-10 19:39:35] [INFO] Checking cron daemon status...
+[2026-10-10 19:39:36] [SUCCESS] Cron service is active and running.
+[2026-10-10 19:39:37] [INFO] Inspecting existing user crontab (BEFORE modifications):
+[2026-10-10 19:39:37] [SUCCESS] Crontab installed with NovaTech backup schedules and live demo monitor.
+[2026-10-10 19:39:37] [INFO] Active Crontab with temporary live demo entry:
+[2026-10-10 19:39:37] [INFO] Monitoring /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/logs/cron.log for live execution triggered by cron daemon...
+[2026-10-10 19:39:37] [INFO] Waiting up to 75 seconds for the next minute tick...
+[2026-10-10 19:40:01] [INFO] ======================================================================
+[2026-10-10 19:40:01] [INFO] Initiating NovaTech Centralized INCREMENTAL Backup
+[2026-10-10 19:40:01] [INFO] ======================================================================
+[2026-10-10 19:40:02] [INFO] Baseline full backup verified: full_20261010_193845.tar.gz
+[2026-10-10 19:40:02] [INFO] Active snapshot file detected: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/active.snar
+[2026-10-10 19:40:02] [INFO] Repository storage check: 927584 KB free space available (threshold: 10240 KB).
+[2026-10-10 19:40:02] [INFO] Target Archive: incr_20261010_194002.tar.gz
+[2026-10-10 19:40:02] [INFO] Executing GNU tar incremental snapshot against /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/active.snar...
+[2026-10-10 19:40:02] [SUCCESS] CRON JOB FIRED SUCCESSFULLY! New output detected in /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/logs/cron.log:
+[2026-10-10 19:40:02] [INFO] Removing temporary 1-minute live demo entry while preserving scheduled policies...
+[2026-10-10 19:40:03] [SUCCESS] Temporary demo schedule removed.
+[2026-10-10 19:40:03] [INFO] Final Scheduled Crontab (AFTER removing demo line):
+[2026-10-10 19:40:03] [SUCCESS] Phase 4 Scheduling & Automation Complete.
+[2026-10-10 19:40:04] [INFO] Generating SHA-256 cryptographic checksum manifest...
+[2026-10-10 19:40:04] [INFO] Verifying archive integrity with sha256sum -c and tar -tzf...
+[2026-10-10 19:40:05] [SUCCESS] Integrity verification PASSED: SHA-256 and tar decompression valid.
+[2026-10-10 19:40:05] [SUCCESS] INCREMENTAL backup completed successfully in 2s.
+[2026-10-10 19:40:05] [SUCCESS] Archive: incr_20261010_194002.tar.gz | Size: 1020 B | SHA256: bb35cf7b19e88c27... (Parent: full_20261010_193845.tar.gz)
+[2026-10-10 19:40:23] [INFO] ======================================================================
+[2026-10-10 19:40:23] [INFO] Phase 5: Security Hardening, Access Control & Cryptographic Validation
+[2026-10-10 19:40:23] [INFO] ======================================================================
+[2026-10-10 19:40:23] [INFO] [Step 1/4] Provisioning dedicated backup group and service account...
+[2026-10-10 19:40:23] [INFO] Creating group: lsatest_backup_ops...
+[2026-10-10 19:40:24] [SUCCESS] Group lsatest_backup_ops created.
+[2026-10-10 19:40:24] [INFO] Creating service user: lsatest_backupadmin (nologin)...
+[2026-10-10 19:40:24] [SUCCESS] Service user lsatest_backupadmin created.
+[2026-10-10 19:40:24] [INFO] Adding operator 'pankaj' to group 'lsatest_backup_ops'...
+[2026-10-10 19:40:24] [INFO] [Step 2/4] Enforcing POSIX ACL and file mode restrictions on repository...
+[2026-10-10 19:41:03] [INFO] ======================================================================
+[2026-10-10 19:41:03] [INFO] Phase 5: Security Hardening, Access Control & Cryptographic Validation
+[2026-10-10 19:41:04] [INFO] ======================================================================
+[2026-10-10 19:41:04] [INFO] [Step 1/4] Demonstrating At-Rest OpenSSL AES-256-CBC Encryption Pipeline...
+[2026-10-10 19:41:04] [WARN] No archive found for encryption demo.
+[2026-10-10 19:41:04] [INFO] [Step 2/4] Provisioning dedicated backup group and service account...
+[2026-10-10 19:41:05] [INFO] Group lsatest_backup_ops already exists.
+[2026-10-10 19:41:05] [INFO] Service user lsatest_backupadmin already exists.
+[2026-10-10 19:41:05] [INFO] [Step 3/4] Enforcing POSIX ownership and file mode restrictions on repository...
+[2026-10-10 19:41:05] [SUCCESS] Repository permission model enforced (700 on repo, 600 on archives, owner: lsatest_backupadmin:lsatest_backup_ops).
+[2026-10-10 19:41:06] [INFO] [Step 4/4] Demonstrating negative authorization check (unauthorized user access denial)...
+[2026-10-10 19:41:06] [INFO] Testing directory access as unprivileged non-member user 'nobody'...
+[2026-10-10 19:41:06] [ERROR] SECURITY RISK: Unauthorized user 'nobody' was able to read repository contents!
+[2026-10-10 19:42:04] [INFO] ======================================================================
+[2026-10-10 19:42:05] [INFO] Phase 5: Security Hardening, Access Control & Cryptographic Validation
+[2026-10-10 19:42:05] [INFO] ======================================================================
+[2026-10-10 19:42:05] [INFO] [Step 1/4] Demonstrating At-Rest OpenSSL AES-256-CBC Encryption Pipeline...
+[2026-10-10 19:42:06] [WARN] No archive found for encryption demo.
+[2026-10-10 19:42:06] [INFO] [Step 2/4] Provisioning dedicated backup group and service account...
+[2026-10-10 19:42:06] [INFO] Group lsatest_backup_ops already exists.
+[2026-10-10 19:42:06] [INFO] Service user lsatest_backupadmin already exists.
+[2026-10-10 19:42:06] [INFO] [Step 3/4] Enforcing POSIX ownership and file mode restrictions on repository...
+[2026-10-10 19:42:07] [SUCCESS] Repository permission model enforced (700 on repo, 600 on archives, owner: lsatest_backupadmin:lsatest_backup_ops).
+[2026-10-10 19:42:07] [INFO] [Step 4/4] Demonstrating negative authorization check (unauthorized user access denial)...
+[2026-10-10 19:42:07] [INFO] Testing directory access as unprivileged non-member user 'nobody'...
+[2026-10-10 19:42:07] [SUCCESS] SECURITY VERIFIED: User 'nobody' was strictly DENIED access (Permission denied) [OK].
+[2026-10-10 19:42:07] [INFO] Testing authorized service user 'lsatest_backupadmin' access...
+[2026-10-10 19:42:07] [SUCCESS] AUTHORIZATION VERIFIED: Service user 'lsatest_backupadmin' has full operational access [OK].
+[2026-10-10 19:42:08] [INFO] Repository Permissions Evidence:
+[2026-10-10 19:42:08] [INFO] Active operator access restored for validation test suite execution.
+[2026-10-10 19:42:08] [SUCCESS] Phase 5 Security Hardening & Validation Complete.
+[2026-10-10 19:42:44] [INFO] ======================================================================
+[2026-10-10 19:42:44] [INFO] Phase 5: Security Hardening, Access Control & Cryptographic Validation
+[2026-10-10 19:42:44] [INFO] ======================================================================
+[2026-10-10 19:42:45] [INFO] [Step 1/4] Demonstrating At-Rest OpenSSL AES-256-CBC Encryption Pipeline...
+[2026-10-10 19:42:45] [INFO] Source Archive for Encryption Demo: full_20261010_193845.tar.gz
+[2026-10-10 19:42:45] [INFO] Encrypting archive with AES-256-CBC & PBKDF2 key derivation...
+[2026-10-10 19:42:45] [SUCCESS] Encrypted payload generated: encrypted_demo.tar.gz.enc (14.28 KB)
+[2026-10-10 19:42:45] [INFO] Decrypting ciphertext payload back to plaintext archive...
+[2026-10-10 19:42:46] [SUCCESS] CRYPTOGRAPHIC PARITY VERIFIED: Decrypted archive SHA-256 matches original exactly [OK].
+[2026-10-10 19:42:46] [INFO] Encryption demonstration artifacts cleaned up.
+[2026-10-10 19:42:46] [INFO] [Step 2/4] Provisioning dedicated backup group and service account...
+[2026-10-10 19:42:46] [INFO] Group lsatest_backup_ops already exists.
+[2026-10-10 19:42:46] [INFO] Service user lsatest_backupadmin already exists.
+[2026-10-10 19:42:46] [INFO] [Step 3/4] Enforcing POSIX ownership and file mode restrictions on repository...
+[2026-10-10 19:42:47] [SUCCESS] Repository permission model enforced (700 on repo, 600 on archives, owner: lsatest_backupadmin:lsatest_backup_ops).
+[2026-10-10 19:42:47] [INFO] [Step 4/4] Demonstrating negative authorization check (unauthorized user access denial)...
+[2026-10-10 19:42:47] [INFO] Testing directory access as unprivileged non-member user 'nobody'...
+[2026-10-10 19:42:47] [SUCCESS] SECURITY VERIFIED: User 'nobody' was strictly DENIED access (Permission denied) [OK].
+[2026-10-10 19:42:47] [INFO] Testing authorized service user 'lsatest_backupadmin' access...
+[2026-10-10 19:42:47] [SUCCESS] AUTHORIZATION VERIFIED: Service user 'lsatest_backupadmin' has full operational access [OK].
+[2026-10-10 19:42:47] [INFO] Repository Permissions Evidence:
+[2026-10-10 19:42:48] [INFO] Active operator access restored for validation test suite execution.
+[2026-10-10 19:42:48] [SUCCESS] Phase 5 Security Hardening & Validation Complete.
+[2026-10-10 19:42:59] [INFO] ======================================================================
+[2026-10-10 19:42:59] [INFO] Initiating NovaTech Centralized FULL Backup (Level 0 Baseline)
+[2026-10-10 19:42:59] [INFO] ======================================================================
+[2026-10-10 19:42:59] [INFO] Source validated: 40 files detected across department shares.
+[2026-10-10 19:43:00] [INFO] Repository storage check: 927572 KB free space available (threshold: 20480 KB).
+[2026-10-10 19:43:00] [INFO] Target Archive: full_20261010_194300.tar.gz
+[2026-10-10 19:43:00] [INFO] Snapshot File : /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/active.snar
+[2026-10-10 19:43:00] [INFO] Executing GNU tar Level 0 baseline snapshot...
+[2026-10-10 19:43:01] [INFO] Generating SHA-256 cryptographic checksum manifest...
+[2026-10-10 19:43:01] [INFO] Verifying archive integrity with sha256sum -c and tar -tzf...
+[2026-10-10 19:43:01] [SUCCESS] Integrity verification PASSED: SHA-256 and tar decompression valid.
+[2026-10-10 19:43:02] [SUCCESS] FULL backup completed successfully in 1s.
+[2026-10-10 19:43:02] [SUCCESS] Archive: full_20261010_194300.tar.gz | Size: 12.21 KB | SHA256: 15cdc03dc3cf33b4...
+[2026-10-10 19:43:02] [INFO] ======================================================================
+[2026-10-10 19:43:02] [INFO] Running NovaTech Backup Retention Policy Enforcement
+[2026-10-10 19:43:02] [INFO] Policy: Retain the 2 most recent Full backups and all associated incrementals
+[2026-10-10 19:43:02] [INFO] Mode  : DRY-RUN (Simulated - No Deletions)
+[2026-10-10 19:43:02] [INFO] ======================================================================
+[2026-10-10 19:43:03] [INFO] Repository scan detected 3 full backup archive(s).
+[2026-10-10 19:43:03] [INFO] Retention demarcation boundary:
+[2026-10-10 19:43:03] [INFO]   Oldest retained full backup: full_20261010_193845.tar.gz
+[2026-10-10 19:43:03] [INFO]   Expired full backup count   : 1
+[2026-10-10 19:43:03] [INFO] Retention Analysis Summary:
+[2026-10-10 19:43:05] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/full_20261010_193535.tar.gz
+[2026-10-10 19:43:05] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/full_20261010_193535.tar.gz.sha256
+[2026-10-10 19:43:05] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/full_20261010_193535.tar.gz.meta
+[2026-10-10 19:43:05] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/full_20261010_193535.tar.gz.snar
+[2026-10-10 19:43:05] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/incr_20261010_193718.tar.gz
+[2026-10-10 19:43:05] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/incr_20261010_193718.tar.gz.sha256
+[2026-10-10 19:43:05] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/incr_20261010_193718.tar.gz.meta
+[2026-10-10 19:43:05] [SUCCESS] Retention dry-run completed. No files were modified or deleted.
+[2026-10-10 19:43:37] [INFO] ======================================================================
+[2026-10-10 19:43:37] [INFO] Running NovaTech Backup Retention Policy Enforcement
+[2026-10-10 19:43:37] [INFO] Policy: Retain the 2 most recent Full backups and all associated incrementals
+[2026-10-10 19:43:37] [INFO] Mode  : LIVE (Active Deletion)
+[2026-10-10 19:43:37] [INFO] ======================================================================
+[2026-10-10 19:43:37] [INFO] Repository scan detected 3 full backup archive(s).
+[2026-10-10 19:43:37] [INFO] Retention demarcation boundary:
+[2026-10-10 19:43:37] [INFO]   Oldest retained full backup: full_20261010_193845.tar.gz
+[2026-10-10 19:43:37] [INFO]   Expired full backup count   : 1
+[2026-10-10 19:43:38] [INFO] Retention Analysis Summary:
+[2026-10-10 19:43:39] [INFO] [PURGED] Deleted: full_20261010_193535.tar.gz
+[2026-10-10 19:43:39] [INFO] [PURGED] Deleted: full_20261010_193535.tar.gz.sha256
+[2026-10-10 19:43:40] [INFO] [PURGED] Deleted: full_20261010_193535.tar.gz.meta
+[2026-10-10 19:43:40] [INFO] [PURGED] Deleted: full_20261010_193535.tar.gz.snar
+[2026-10-10 19:43:40] [INFO] [PURGED] Deleted: incr_20261010_193718.tar.gz
+[2026-10-10 19:43:41] [INFO] [PURGED] Deleted: incr_20261010_193718.tar.gz.sha256
+[2026-10-10 19:43:41] [INFO] [PURGED] Deleted: incr_20261010_193718.tar.gz.meta
+[2026-10-10 19:43:41] [SUCCESS] Retention enforcement executed: Purged 7 file(s), reclaimed 18.50 KB.
+[2026-10-10 19:43:52] [INFO] ======================================================================
+[2026-10-10 19:43:52] [INFO] Running NovaTech Backup Integrity Verification
+[2026-10-10 19:43:52] [INFO] ======================================================================
+[2026-10-10 19:43:52] [INFO] Evaluating 5 archive(s) for cryptographic and structural validity...
+[2026-10-10 19:43:53] [INFO] VERIFICATION PASS: full_20261010_193845.tar.gz (SHA256: VALID, TAR: VALID)
+[2026-10-10 19:43:53] [INFO] VERIFICATION PASS: full_20261010_194300.tar.gz (SHA256: VALID, TAR: VALID)
+[2026-10-10 19:43:54] [INFO] VERIFICATION PASS: incr_20261010_193851.tar.gz (SHA256: VALID, TAR: VALID)
+[2026-10-10 19:43:54] [INFO] VERIFICATION PASS: incr_20261010_193856.tar.gz (SHA256: VALID, TAR: VALID)
+[2026-10-10 19:43:54] [INFO] VERIFICATION PASS: incr_20261010_194002.tar.gz (SHA256: VALID, TAR: VALID)
+[2026-10-10 19:43:54] [INFO] Verification Summary: Total: 5 | Passed: 5 | Failed: 0
+[2026-10-10 19:43:54] [SUCCESS] Integrity audit completed: ALL archives verified intact and authentic [OK].
+[2026-10-10 19:44:04] [INFO] [Phase 3] Executing Disaster Recovery Validation Suite (recovery_test.sh)...
+[2026-10-10 19:44:04] [INFO] ======================================================================
+[2026-10-10 19:44:04] [INFO] Executing NovaTech Disaster Recovery Verification Suite (CO4 Core)
+[2026-10-10 19:44:04] [INFO] ======================================================================
+[2026-10-10 19:44:04] [INFO] [Step 1/6] Executing Baseline FULL Backup...
+[2026-10-10 19:44:05] [INFO] ======================================================================
+[2026-10-10 19:44:05] [INFO] Initiating NovaTech Centralized FULL Backup (Level 0 Baseline)
+[2026-10-10 19:44:05] [INFO] ======================================================================
+[2026-10-10 19:44:05] [INFO] Source validated: 40 files detected across department shares.
+[2026-10-10 19:44:05] [INFO] Repository storage check: 927584 KB free space available (threshold: 20480 KB).
+[2026-10-10 19:44:05] [INFO] Target Archive: full_20261010_194405.tar.gz
+[2026-10-10 19:44:05] [INFO] Snapshot File : /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/active.snar
+[2026-10-10 19:44:06] [INFO] Executing GNU tar Level 0 baseline snapshot...
+[2026-10-10 19:44:06] [INFO] Generating SHA-256 cryptographic checksum manifest...
+[2026-10-10 19:44:07] [INFO] Verifying archive integrity with sha256sum -c and tar -tzf...
+[2026-10-10 19:44:07] [SUCCESS] Integrity verification PASSED: SHA-256 and tar decompression valid.
+[2026-10-10 19:44:07] [SUCCESS] FULL backup completed successfully in 0s.
+[2026-10-10 19:44:07] [SUCCESS] Archive: full_20261010_194405.tar.gz | Size: 12.21 KB | SHA256: 15cdc03dc3cf33b4...
+[2026-10-10 19:44:07] [INFO] [Step 2/6] Applying Data Mutation Set 1 & Creating Incremental 1...
+[2026-10-10 19:44:08] [INFO] ======================================================================
+[2026-10-10 19:44:08] [INFO] Phase 1: Mutating Departmental Data (Stage 1)
+[2026-10-10 19:44:08] [INFO] ======================================================================
+[2026-10-10 19:44:08] [INFO] Applying Mutation Set 1 (for Incremental Backup 1)...
+[2026-10-10 19:44:08] [INFO]   [ADD] finance/audit_addendum_q1.csv
+[2026-10-10 19:44:09] [INFO]   [ADD] engineering/hotfix_release_notes_2.4.1.md
+[2026-10-10 19:44:09] [INFO]   [MODIFY] sales/crm_leads_enterprise_q1.csv
+[2026-10-10 19:44:29] [INFO] [Phase 3] Executing Disaster Recovery Validation Suite (recovery_test.sh)...
+[2026-10-10 19:44:30] [INFO] ======================================================================
+[2026-10-10 19:44:30] [INFO] Executing NovaTech Disaster Recovery Verification Suite (CO4 Core)
+[2026-10-10 19:44:30] [INFO] ======================================================================
+[2026-10-10 19:44:30] [INFO] [Setup] Initializing/refreshing pristine department dataset...
+[2026-10-10 19:44:30] [INFO] ======================================================================
+[2026-10-10 19:44:30] [INFO] Phase 1: Generating Fictional Department Dataset (Demonstration Data)
+[2026-10-10 19:44:30] [INFO] ======================================================================
+[2026-10-10 19:44:31] [INFO] Populating Finance department files...
+[2026-10-10 19:44:31] [INFO] Populating Human Resources department files...
+[2026-10-10 19:44:32] [INFO] Populating Engineering department files...
+[2026-10-10 19:44:33] [INFO] Populating Sales department files...
+[2026-10-10 19:44:34] [SUCCESS] Seeding complete: Created 53 fictional enterprise files across 4 departments.
+[2026-10-10 19:44:34] [SUCCESS] Total Source Dataset Size: 19.32 KB
+[2026-10-10 19:44:34] [INFO] [Step 1/6] Executing Baseline FULL Backup...
+[2026-10-10 19:44:35] [INFO] ======================================================================
+[2026-10-10 19:44:35] [INFO] Initiating NovaTech Centralized FULL Backup (Level 0 Baseline)
+[2026-10-10 19:44:35] [INFO] ======================================================================
+[2026-10-10 19:44:35] [INFO] Source validated: 53 files detected across department shares.
+[2026-10-10 19:44:35] [INFO] Repository storage check: 927556 KB free space available (threshold: 20480 KB).
+[2026-10-10 19:44:35] [INFO] Target Archive: full_20261010_194435.tar.gz
+[2026-10-10 19:44:35] [INFO] Snapshot File : /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/active.snar
+[2026-10-10 19:44:36] [INFO] Executing GNU tar Level 0 baseline snapshot...
+[2026-10-10 19:44:37] [INFO] Generating SHA-256 cryptographic checksum manifest...
+[2026-10-10 19:44:37] [INFO] Verifying archive integrity with sha256sum -c and tar -tzf...
+[2026-10-10 19:44:37] [SUCCESS] Integrity verification PASSED: SHA-256 and tar decompression valid.
+[2026-10-10 19:44:37] [SUCCESS] FULL backup completed successfully in 1s.
+[2026-10-10 19:44:38] [SUCCESS] Archive: full_20261010_194435.tar.gz | Size: 14.56 KB | SHA256: fc189d60049ba4d0...
+[2026-10-10 19:44:38] [INFO] [Step 2/6] Applying Data Mutation Set 1 & Creating Incremental 1...
+[2026-10-10 19:44:38] [INFO] ======================================================================
+[2026-10-10 19:44:38] [INFO] Phase 1: Mutating Departmental Data (Stage 1)
+[2026-10-10 19:44:39] [INFO] ======================================================================
+[2026-10-10 19:44:39] [INFO] Applying Mutation Set 1 (for Incremental Backup 1)...
+[2026-10-10 19:44:39] [INFO]   [ADD] finance/audit_addendum_q1.csv
+[2026-10-10 19:44:39] [INFO]   [ADD] engineering/hotfix_release_notes_2.4.1.md
+[2026-10-10 19:44:39] [INFO]   [MODIFY] sales/crm_leads_enterprise_q1.csv
+[2026-10-10 19:44:40] [INFO]   [MODIFY] hr/employee_directory.csv
+[2026-10-10 19:44:40] [INFO]   [DELETE] sales/win_loss_analysis_q2.csv
+[2026-10-10 19:44:40] [SUCCESS] Mutation Stage 1 applied cleanly: 2 added, 2 modified, 1 deleted.
+[2026-10-10 19:44:40] [INFO] ======================================================================
+[2026-10-10 19:44:41] [INFO] Initiating NovaTech Centralized INCREMENTAL Backup
+[2026-10-10 19:44:41] [INFO] ======================================================================
+[2026-10-10 19:44:41] [INFO] Baseline full backup verified: full_20261010_194435.tar.gz
+[2026-10-10 19:44:41] [INFO] Active snapshot file detected: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/active.snar
+[2026-10-10 19:44:41] [INFO] Repository storage check: 927528 KB free space available (threshold: 10240 KB).
+[2026-10-10 19:44:41] [INFO] Target Archive: incr_20261010_194441.tar.gz
+[2026-10-10 19:44:41] [INFO] Executing GNU tar incremental snapshot against /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/active.snar...
+[2026-10-10 19:44:42] [INFO] Generating SHA-256 cryptographic checksum manifest...
+[2026-10-10 19:44:42] [INFO] Verifying archive integrity with sha256sum -c and tar -tzf...
+[2026-10-10 19:44:42] [SUCCESS] Integrity verification PASSED: SHA-256 and tar decompression valid.
+[2026-10-10 19:44:42] [SUCCESS] INCREMENTAL backup completed successfully in 1s.
+[2026-10-10 19:44:42] [SUCCESS] Archive: incr_20261010_194441.tar.gz | Size: 2.09 KB | SHA256: 4bbc2d39d921a4c9... (Parent: full_20261010_194435.tar.gz)
+[2026-10-10 19:44:42] [INFO] [Step 3/6] Applying Data Mutation Set 2 & Creating Incremental 2...
+[2026-10-10 19:44:43] [INFO] ======================================================================
+[2026-10-10 19:44:43] [INFO] Phase 1: Mutating Departmental Data (Stage 2)
+[2026-10-10 19:44:43] [INFO] ======================================================================
+[2026-10-10 19:44:43] [INFO] Applying Mutation Set 2 (for Incremental Backup 2)...
+[2026-10-10 19:44:43] [INFO]   [ADD] hr/wellness_initiative_feedback.csv
+[2026-10-10 19:44:43] [INFO]   [ADD] engineering/api_gateway_routes.json
+[2026-10-10 19:44:44] [INFO]   [MODIFY] engineering/architecture_decision_records.md
+[2026-10-10 19:44:44] [INFO]   [MODIFY] finance/petty_cash_disbursements.csv
+[2026-10-10 19:44:44] [INFO]   [DELETE] finance/investor_deck_notes.md
+[2026-10-10 19:44:44] [SUCCESS] Mutation Stage 2 applied cleanly: 2 added, 2 modified, 1 deleted.
+[2026-10-10 19:44:44] [INFO] ======================================================================
+[2026-10-10 19:44:44] [INFO] Initiating NovaTech Centralized INCREMENTAL Backup
+[2026-10-10 19:44:44] [INFO] ======================================================================
+[2026-10-10 19:44:45] [INFO] Baseline full backup verified: full_20261010_194435.tar.gz
+[2026-10-10 19:44:45] [INFO] Active snapshot file detected: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/active.snar
+[2026-10-10 19:44:45] [INFO] Repository storage check: 927516 KB free space available (threshold: 10240 KB).
+[2026-10-10 19:44:46] [INFO] Target Archive: incr_20261010_194446.tar.gz
+[2026-10-10 19:44:46] [INFO] Executing GNU tar incremental snapshot against /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/active.snar...
+[2026-10-10 19:44:46] [INFO] Generating SHA-256 cryptographic checksum manifest...
+[2026-10-10 19:44:47] [INFO] Verifying archive integrity with sha256sum -c and tar -tzf...
+[2026-10-10 19:44:47] [SUCCESS] Integrity verification PASSED: SHA-256 and tar decompression valid.
+[2026-10-10 19:44:47] [SUCCESS] INCREMENTAL backup completed successfully in 0s.
+[2026-10-10 19:44:47] [SUCCESS] Archive: incr_20261010_194446.tar.gz | Size: 2.00 KB | SHA256: 27fb666772ba4d1c... (Parent: full_20261010_194435.tar.gz)
+[2026-10-10 19:44:47] [INFO] [Step 4/6] Generating Pre-Disaster Cryptographic Manifest of Source...
+[2026-10-10 19:44:48] [SUCCESS] Pre-disaster snapshot indexed: 51 files recorded.
+[2026-10-10 19:44:49] [INFO] [Step 5/6] Simulating Catastrophic Data Loss in Source Sandbox...
+[2026-10-10 19:44:49] [WARN]   [DISASTER SIMULATION] Purging entire department share: source/sales/
+[2026-10-10 19:44:49] [WARN]   [DISASTER SIMULATION] Corrupting critical technical asset: source/engineering/architecture_decision_records.md
+[2026-10-10 19:44:49] [WARN] Disaster effect: File count dropped from 51 to 40 files.
+[2026-10-10 19:44:49] [INFO] [Step 6/6] Executing Full Chain Disaster Restoration...
+[2026-10-10 19:44:51] [INFO] ======================================================================
+[2026-10-10 19:44:51] [INFO] Initiating NovaTech Centralized Recovery & Restoration Engine
+[2026-10-10 19:44:51] [INFO] Target Directory: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/restore_target
+[2026-10-10 19:44:52] [INFO] ======================================================================
+[2026-10-10 19:44:52] [INFO] Identified Baseline Full Backup: full_20261010_194435.tar.gz (Timestamp: 20261010_194435)
+[2026-10-10 19:44:52] [INFO] Identified 2 incremental backup archive(s) in recovery chain.
+[2026-10-10 19:44:52] [INFO] Executing Pre-Flight Cryptographic Checksum Verification...
+[2026-10-10 19:44:52] [INFO]   Verifying: full_20261010_194435.tar.gz...
+[2026-10-10 19:44:52] [INFO]   Verifying: incr_20261010_194441.tar.gz...
+[2026-10-10 19:44:53] [INFO]   Verifying: incr_20261010_194446.tar.gz...
+[2026-10-10 19:44:53] [SUCCESS] Pre-Flight Verification PASSED: All 3 archive(s) verified authentic.
+[2026-10-10 19:44:54] [INFO] Stage 1: Extracting Full Baseline (full_20261010_194435.tar.gz) into target sandbox...
+[2026-10-10 19:44:56] [SUCCESS] Full baseline restored successfully.
+[2026-10-10 19:44:56] [INFO] Stage 2: Replaying 2 incremental archive(s)...
+[2026-10-10 19:44:56] [INFO]   Replaying [1/2]: incr_20261010_194441.tar.gz...
+[2026-10-10 19:44:57] [INFO]   Replaying [2/2]: incr_20261010_194446.tar.gz...
+[2026-10-10 19:44:57] [SUCCESS] All incremental revisions replayed successfully.
+[2026-10-10 19:44:58] [SUCCESS] Point-in-Time Restoration Complete in 4s.
+[2026-10-10 19:44:59] [SUCCESS] Target Directory : /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/restore_target
+[2026-10-10 19:44:59] [SUCCESS] Restored Files   : 51 files (19.45 KB)
+[2026-10-10 19:44:59] [INFO] Analyzing restored dataset against pre-disaster cryptographic manifest...
+[2026-10-10 19:45:09] [INFO] Directory level check: Restored structure is healthy.
+[2026-10-10 19:45:09] [SUCCESS] RECOVERY AUDIT VERDICT: PASS (100% Data Fidelity Preserved)
+[2026-10-10 19:45:09] [INFO] ------------------------------------------------------------------
+[2026-10-10 19:45:09] [INFO] Demonstrating Resilient Detection of Corrupted Archive
+[2026-10-10 19:45:09] [INFO] ------------------------------------------------------------------
+[2026-10-10 19:45:09] [INFO] Creating test clone of archive: incr_20261010_194446.tar.gz -> corrupt_tamper_demo.tar.gz
+[2026-10-10 19:45:09] [INFO] Injecting deliberate bit-flip corruption at offset 128 (dd conv=notrunc)...
+[2026-10-10 19:45:09] [INFO] Running verify_backup.sh against tampered archive...
+[2026-10-10 19:45:09] [INFO] ======================================================================
+[2026-10-10 19:45:09] [INFO] Running NovaTech Backup Integrity Verification
+[2026-10-10 19:45:09] [INFO] ======================================================================
+[2026-10-10 19:45:10] [INFO] Evaluating 1 archive(s) for cryptographic and structural validity...
+[2026-10-10 19:45:10] [ERROR] VERIFICATION FAILED: corrupt_tamper_demo.tar.gz (SHA256: MISMATCH, TAR: CORRUPT)
+[2026-10-10 19:45:10] [INFO] Verification Summary: Total: 1 | Passed: 0 | Failed: 1
+[2026-10-10 19:45:10] [ERROR] Integrity audit completed with ERRORS: 1 archive(s) CORRUPT.
+[2026-10-10 19:45:10] [SUCCESS] CORRUPTION DETECTED PROMPTLY: Verification engine blocked corrupted archive [OK].
+[2026-10-10 19:45:10] [INFO] Corrupted demo archive safely cleaned up.
+[2026-10-10 19:45:10] [INFO] [Phase 2] Executing Full Repository Integrity Verification (verify_backup.sh)...
+[2026-10-10 19:45:10] [INFO] ======================================================================
+[2026-10-10 19:45:11] [INFO] Running NovaTech Backup Integrity Verification
+[2026-10-10 19:45:11] [INFO] ======================================================================
+[2026-10-10 19:45:11] [INFO] Evaluating 9 archive(s) for cryptographic and structural validity...
+[2026-10-10 19:45:11] [INFO] VERIFICATION PASS: full_20261010_193845.tar.gz (SHA256: VALID, TAR: VALID)
+[2026-10-10 19:45:11] [INFO] VERIFICATION PASS: full_20261010_194300.tar.gz (SHA256: VALID, TAR: VALID)
+[2026-10-10 19:45:11] [INFO] VERIFICATION PASS: full_20261010_194405.tar.gz (SHA256: VALID, TAR: VALID)
+[2026-10-10 19:45:12] [INFO] VERIFICATION PASS: full_20261010_194435.tar.gz (SHA256: VALID, TAR: VALID)
+[2026-10-10 19:45:12] [INFO] VERIFICATION PASS: incr_20261010_193851.tar.gz (SHA256: VALID, TAR: VALID)
+[2026-10-10 19:45:12] [INFO] VERIFICATION PASS: incr_20261010_193856.tar.gz (SHA256: VALID, TAR: VALID)
+[2026-10-10 19:45:12] [INFO] VERIFICATION PASS: incr_20261010_194002.tar.gz (SHA256: VALID, TAR: VALID)
+[2026-10-10 19:45:12] [INFO] VERIFICATION PASS: incr_20261010_194441.tar.gz (SHA256: VALID, TAR: VALID)
+[2026-10-10 19:45:12] [INFO] VERIFICATION PASS: incr_20261010_194446.tar.gz (SHA256: VALID, TAR: VALID)
+[2026-10-10 19:45:12] [INFO] Verification Summary: Total: 9 | Passed: 9 | Failed: 0
+[2026-10-10 19:45:12] [SUCCESS] Integrity audit completed: ALL archives verified intact and authentic [OK].
+[2026-10-10 19:45:13] [INFO] [Phase 2] Executing Retention Policy Dry-Run Evaluation (retention.sh --dry-run)...
+[2026-10-10 19:45:13] [INFO] ======================================================================
+[2026-10-10 19:45:13] [INFO] Running NovaTech Backup Retention Policy Enforcement
+[2026-10-10 19:45:13] [INFO] Policy: Retain the 2 most recent Full backups and all associated incrementals
+[2026-10-10 19:45:13] [INFO] Mode  : DRY-RUN (Simulated - No Deletions)
+[2026-10-10 19:45:13] [INFO] ======================================================================
+[2026-10-10 19:45:13] [INFO] Repository scan detected 4 full backup archive(s).
+[2026-10-10 19:45:13] [INFO] Retention demarcation boundary:
+[2026-10-10 19:45:13] [INFO]   Oldest retained full backup: full_20261010_194405.tar.gz
+[2026-10-10 19:45:13] [INFO]   Expired full backup count   : 2
+[2026-10-10 19:45:13] [INFO] Retention Analysis Summary:
+[2026-10-10 19:45:14] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/full_20261010_193845.tar.gz
+[2026-10-10 19:45:15] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/full_20261010_193845.tar.gz.sha256
+[2026-10-10 19:45:15] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/full_20261010_193845.tar.gz.meta
+[2026-10-10 19:45:15] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/full_20261010_193845.tar.gz.snar
+[2026-10-10 19:45:15] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/full_20261010_194300.tar.gz
+[2026-10-10 19:45:15] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/full_20261010_194300.tar.gz.sha256
+[2026-10-10 19:45:15] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/full_20261010_194300.tar.gz.meta
+[2026-10-10 19:45:15] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/full_20261010_194300.tar.gz.snar
+[2026-10-10 19:45:15] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/incr_20261010_193851.tar.gz
+[2026-10-10 19:45:15] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/incr_20261010_193851.tar.gz.sha256
+[2026-10-10 19:45:15] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/incr_20261010_193851.tar.gz.meta
+[2026-10-10 19:45:15] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/incr_20261010_193856.tar.gz
+[2026-10-10 19:45:15] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/incr_20261010_193856.tar.gz.sha256
+[2026-10-10 19:45:15] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/incr_20261010_193856.tar.gz.meta
+[2026-10-10 19:45:15] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/incr_20261010_194002.tar.gz
+[2026-10-10 19:45:16] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/incr_20261010_194002.tar.gz.sha256
+[2026-10-10 19:45:16] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/incr_20261010_194002.tar.gz.meta
+[2026-10-10 19:45:16] [SUCCESS] Retention dry-run completed. No files were modified or deleted.
+[2026-10-10 19:45:16] [INFO] Regenerating comprehensive HTML audit report from live state...
+[2026-10-10 19:45:16] [INFO] Generating live HTML audit report: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/report.html...
+[2026-10-10 19:46:05] [INFO] Generating live HTML audit report: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/report.html...
+[2026-10-10 19:46:06] [SUCCESS] HTML Report successfully generated at: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/report.html
+[2026-10-10 19:46:14] [INFO] [Phase 3] Executing Disaster Recovery Validation Suite (recovery_test.sh)...
+[2026-10-10 19:46:15] [INFO] ======================================================================
+[2026-10-10 19:46:15] [INFO] Executing NovaTech Disaster Recovery Verification Suite (CO4 Core)
+[2026-10-10 19:46:15] [INFO] ======================================================================
+[2026-10-10 19:46:15] [INFO] [Setup] Initializing/refreshing pristine department dataset...
+[2026-10-10 19:46:15] [INFO] ======================================================================
+[2026-10-10 19:46:15] [INFO] Phase 1: Generating Fictional Department Dataset (Demonstration Data)
+[2026-10-10 19:46:15] [INFO] ======================================================================
+[2026-10-10 19:46:15] [INFO] Populating Finance department files...
+[2026-10-10 19:46:16] [INFO] Populating Human Resources department files...
+[2026-10-10 19:46:17] [INFO] Populating Engineering department files...
+[2026-10-10 19:46:17] [INFO] Populating Sales department files...
+[2026-10-10 19:46:19] [SUCCESS] Seeding complete: Created 53 fictional enterprise files across 4 departments.
+[2026-10-10 19:46:19] [SUCCESS] Total Source Dataset Size: 19.32 KB
+[2026-10-10 19:46:19] [INFO] [Step 1/6] Executing Baseline FULL Backup...
+[2026-10-10 19:46:20] [INFO] ======================================================================
+[2026-10-10 19:46:21] [INFO] Initiating NovaTech Centralized FULL Backup (Level 0 Baseline)
+[2026-10-10 19:46:21] [INFO] ======================================================================
+[2026-10-10 19:46:21] [INFO] Source validated: 53 files detected across department shares.
+[2026-10-10 19:46:22] [INFO] Repository storage check: 927504 KB free space available (threshold: 20480 KB).
+[2026-10-10 19:46:22] [INFO] Target Archive: full_20261010_194622.tar.gz
+[2026-10-10 19:46:22] [INFO] Snapshot File : /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/active.snar
+[2026-10-10 19:46:22] [INFO] Executing GNU tar Level 0 baseline snapshot...
+[2026-10-10 19:46:26] [INFO] Generating SHA-256 cryptographic checksum manifest...
+[2026-10-10 19:46:26] [INFO] Verifying archive integrity with sha256sum -c and tar -tzf...
+[2026-10-10 19:46:27] [SUCCESS] Integrity verification PASSED: SHA-256 and tar decompression valid.
+[2026-10-10 19:46:27] [SUCCESS] FULL backup completed successfully in 4s.
+[2026-10-10 19:46:27] [SUCCESS] Archive: full_20261010_194622.tar.gz | Size: 14.55 KB | SHA256: 7a8feb8ade12dcfd...
+[2026-10-10 19:46:27] [INFO] [Step 2/6] Applying Data Mutation Set 1 & Creating Incremental 1...
+[2026-10-10 19:46:27] [INFO] ======================================================================
+[2026-10-10 19:46:28] [INFO] Phase 1: Mutating Departmental Data (Stage 1)
+[2026-10-10 19:46:28] [INFO] ======================================================================
+[2026-10-10 19:46:28] [INFO] Applying Mutation Set 1 (for Incremental Backup 1)...
+[2026-10-10 19:46:28] [INFO]   [ADD] finance/audit_addendum_q1.csv
+[2026-10-10 19:46:28] [INFO]   [ADD] engineering/hotfix_release_notes_2.4.1.md
+[2026-10-10 19:46:29] [INFO]   [MODIFY] sales/crm_leads_enterprise_q1.csv
+[2026-10-10 19:46:29] [INFO]   [MODIFY] hr/employee_directory.csv
+[2026-10-10 19:46:30] [INFO]   [DELETE] sales/win_loss_analysis_q2.csv
+[2026-10-10 19:46:30] [SUCCESS] Mutation Stage 1 applied cleanly: 2 added, 2 modified, 1 deleted.
+[2026-10-10 19:46:31] [INFO] ======================================================================
+[2026-10-10 19:46:31] [INFO] Initiating NovaTech Centralized INCREMENTAL Backup
+[2026-10-10 19:46:31] [INFO] ======================================================================
+[2026-10-10 19:46:32] [INFO] Baseline full backup verified: full_20261010_194622.tar.gz
+[2026-10-10 19:46:32] [INFO] Active snapshot file detected: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/active.snar
+[2026-10-10 19:46:32] [INFO] Repository storage check: 927476 KB free space available (threshold: 10240 KB).
+[2026-10-10 19:46:32] [INFO] Target Archive: incr_20261010_194632.tar.gz
+[2026-10-10 19:46:32] [INFO] Executing GNU tar incremental snapshot against /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/active.snar...
+[2026-10-10 19:46:35] [INFO] Generating SHA-256 cryptographic checksum manifest...
+[2026-10-10 19:46:35] [INFO] Verifying archive integrity with sha256sum -c and tar -tzf...
+[2026-10-10 19:46:35] [SUCCESS] Integrity verification PASSED: SHA-256 and tar decompression valid.
+[2026-10-10 19:46:36] [SUCCESS] INCREMENTAL backup completed successfully in 3s.
+[2026-10-10 19:46:36] [SUCCESS] Archive: incr_20261010_194632.tar.gz | Size: 2.10 KB | SHA256: 9c31cdcabcfcb4e4... (Parent: full_20261010_194622.tar.gz)
+[2026-10-10 19:46:36] [INFO] [Step 3/6] Applying Data Mutation Set 2 & Creating Incremental 2...
+[2026-10-10 19:46:37] [INFO] ======================================================================
+[2026-10-10 19:46:38] [INFO] Phase 1: Mutating Departmental Data (Stage 2)
+[2026-10-10 19:46:38] [INFO] ======================================================================
+[2026-10-10 19:46:38] [INFO] Applying Mutation Set 2 (for Incremental Backup 2)...
+[2026-10-10 19:46:38] [INFO]   [ADD] hr/wellness_initiative_feedback.csv
+[2026-10-10 19:46:38] [INFO]   [ADD] engineering/api_gateway_routes.json
+[2026-10-10 19:46:39] [INFO]   [MODIFY] engineering/architecture_decision_records.md
+[2026-10-10 19:46:39] [INFO]   [MODIFY] finance/petty_cash_disbursements.csv
+[2026-10-10 19:46:40] [INFO]   [DELETE] finance/investor_deck_notes.md
+[2026-10-10 19:46:40] [SUCCESS] Mutation Stage 2 applied cleanly: 2 added, 2 modified, 1 deleted.
+[2026-10-10 19:46:40] [INFO] ======================================================================
+[2026-10-10 19:46:41] [INFO] Initiating NovaTech Centralized INCREMENTAL Backup
+[2026-10-10 19:46:41] [INFO] ======================================================================
+[2026-10-10 19:46:41] [INFO] Baseline full backup verified: full_20261010_194622.tar.gz
+[2026-10-10 19:46:41] [INFO] Active snapshot file detected: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/active.snar
+[2026-10-10 19:46:41] [INFO] Repository storage check: 927464 KB free space available (threshold: 10240 KB).
+[2026-10-10 19:46:41] [INFO] Target Archive: incr_20261010_194641.tar.gz
+[2026-10-10 19:46:42] [INFO] Executing GNU tar incremental snapshot against /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/active.snar...
+[2026-10-10 19:46:43] [INFO] Generating SHA-256 cryptographic checksum manifest...
+[2026-10-10 19:46:43] [INFO] Verifying archive integrity with sha256sum -c and tar -tzf...
+[2026-10-10 19:46:43] [SUCCESS] Integrity verification PASSED: SHA-256 and tar decompression valid.
+[2026-10-10 19:46:44] [SUCCESS] INCREMENTAL backup completed successfully in 1s.
+[2026-10-10 19:46:44] [SUCCESS] Archive: incr_20261010_194641.tar.gz | Size: 2.02 KB | SHA256: 22ca042c29a213ab... (Parent: full_20261010_194622.tar.gz)
+[2026-10-10 19:46:44] [INFO] [Step 4/6] Generating Pre-Disaster Cryptographic Manifest of Source...
+[2026-10-10 19:46:48] [SUCCESS] Pre-disaster snapshot indexed: 51 files recorded.
+[2026-10-10 19:46:48] [INFO] [Step 5/6] Simulating Catastrophic Data Loss in Source Sandbox...
+[2026-10-10 19:46:48] [WARN]   [DISASTER SIMULATION] Purging entire department share: source/sales/
+[2026-10-10 19:46:48] [WARN]   [DISASTER SIMULATION] Corrupting critical technical asset: source/engineering/architecture_decision_records.md
+[2026-10-10 19:46:49] [WARN] Disaster effect: File count dropped from 51 to 40 files.
+[2026-10-10 19:46:49] [INFO] [Step 6/6] Executing Full Chain Disaster Restoration...
+[2026-10-10 19:46:50] [INFO] ======================================================================
+[2026-10-10 19:46:50] [INFO] Initiating NovaTech Centralized Recovery & Restoration Engine
+[2026-10-10 19:46:50] [INFO] Target Directory: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/restore_target
+[2026-10-10 19:46:50] [INFO] ======================================================================
+[2026-10-10 19:46:50] [INFO] Identified Baseline Full Backup: full_20261010_194622.tar.gz (Timestamp: 20261010_194622)
+[2026-10-10 19:46:51] [INFO] Identified 2 incremental backup archive(s) in recovery chain.
+[2026-10-10 19:46:51] [INFO] Executing Pre-Flight Cryptographic Checksum Verification...
+[2026-10-10 19:46:51] [INFO]   Verifying: full_20261010_194622.tar.gz...
+[2026-10-10 19:46:51] [INFO]   Verifying: incr_20261010_194632.tar.gz...
+[2026-10-10 19:46:52] [INFO]   Verifying: incr_20261010_194641.tar.gz...
+[2026-10-10 19:46:52] [SUCCESS] Pre-Flight Verification PASSED: All 3 archive(s) verified authentic.
+[2026-10-10 19:46:52] [INFO] Stage 1: Extracting Full Baseline (full_20261010_194622.tar.gz) into target sandbox...
+[2026-10-10 19:46:54] [SUCCESS] Full baseline restored successfully.
+[2026-10-10 19:46:54] [INFO] Stage 2: Replaying 2 incremental archive(s)...
+[2026-10-10 19:46:54] [INFO]   Replaying [1/2]: incr_20261010_194632.tar.gz...
+[2026-10-10 19:46:54] [INFO]   Replaying [2/2]: incr_20261010_194641.tar.gz...
+[2026-10-10 19:46:54] [SUCCESS] All incremental revisions replayed successfully.
+[2026-10-10 19:46:55] [SUCCESS] Point-in-Time Restoration Complete in 3s.
+[2026-10-10 19:46:55] [SUCCESS] Target Directory : /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/restore_target
+[2026-10-10 19:46:55] [SUCCESS] Restored Files   : 51 files (19.45 KB)
+[2026-10-10 19:46:55] [INFO] Analyzing restored dataset against pre-disaster cryptographic manifest...
+[2026-10-10 19:47:00] [INFO] Directory level check: Restored structure is healthy.
+[2026-10-10 19:47:00] [SUCCESS] RECOVERY AUDIT VERDICT: PASS (100% Data Fidelity Preserved)
+[2026-10-10 19:47:00] [INFO] ------------------------------------------------------------------
+[2026-10-10 19:47:00] [INFO] Demonstrating Resilient Detection of Corrupted Archive
+[2026-10-10 19:47:00] [INFO] ------------------------------------------------------------------
+[2026-10-10 19:47:00] [INFO] Creating test clone of archive: incr_20261010_194641.tar.gz -> corrupt_tamper_demo.tar.gz
+[2026-10-10 19:47:00] [INFO] Injecting deliberate bit-flip corruption at offset 128 (dd conv=notrunc)...
+[2026-10-10 19:47:00] [INFO] Running verify_backup.sh against tampered archive...
+[2026-10-10 19:47:01] [INFO] ======================================================================
+[2026-10-10 19:47:01] [INFO] Running NovaTech Backup Integrity Verification
+[2026-10-10 19:47:01] [INFO] ======================================================================
+[2026-10-10 19:47:01] [INFO] Evaluating 1 archive(s) for cryptographic and structural validity...
+[2026-10-10 19:47:01] [ERROR] VERIFICATION FAILED: corrupt_tamper_demo.tar.gz (SHA256: MISMATCH, TAR: CORRUPT)
+[2026-10-10 19:47:01] [INFO] Verification Summary: Total: 1 | Passed: 0 | Failed: 1
+[2026-10-10 19:47:01] [ERROR] Integrity audit completed with ERRORS: 1 archive(s) CORRUPT.
+[2026-10-10 19:47:01] [SUCCESS] CORRUPTION DETECTED PROMPTLY: Verification engine blocked corrupted archive [OK].
+[2026-10-10 19:47:01] [INFO] Corrupted demo archive safely cleaned up.
+[2026-10-10 19:47:01] [INFO] [Phase 2] Executing Full Repository Integrity Verification (verify_backup.sh)...
+[2026-10-10 19:47:01] [INFO] ======================================================================
+[2026-10-10 19:47:01] [INFO] Running NovaTech Backup Integrity Verification
+[2026-10-10 19:47:01] [INFO] ======================================================================
+[2026-10-10 19:47:01] [INFO] Evaluating 12 archive(s) for cryptographic and structural validity...
+[2026-10-10 19:47:02] [INFO] VERIFICATION PASS: full_20261010_193845.tar.gz (SHA256: VALID, TAR: VALID)
+[2026-10-10 19:47:02] [INFO] VERIFICATION PASS: full_20261010_194300.tar.gz (SHA256: VALID, TAR: VALID)
+[2026-10-10 19:47:02] [INFO] VERIFICATION PASS: full_20261010_194405.tar.gz (SHA256: VALID, TAR: VALID)
+[2026-10-10 19:47:02] [INFO] VERIFICATION PASS: full_20261010_194435.tar.gz (SHA256: VALID, TAR: VALID)
+[2026-10-10 19:47:02] [INFO] VERIFICATION PASS: full_20261010_194622.tar.gz (SHA256: VALID, TAR: VALID)
+[2026-10-10 19:47:02] [INFO] VERIFICATION PASS: incr_20261010_193851.tar.gz (SHA256: VALID, TAR: VALID)
+[2026-10-10 19:47:02] [INFO] VERIFICATION PASS: incr_20261010_193856.tar.gz (SHA256: VALID, TAR: VALID)
+[2026-10-10 19:47:03] [INFO] VERIFICATION PASS: incr_20261010_194002.tar.gz (SHA256: VALID, TAR: VALID)
+[2026-10-10 19:47:03] [INFO] VERIFICATION PASS: incr_20261010_194441.tar.gz (SHA256: VALID, TAR: VALID)
+[2026-10-10 19:47:03] [INFO] VERIFICATION PASS: incr_20261010_194446.tar.gz (SHA256: VALID, TAR: VALID)
+[2026-10-10 19:47:03] [INFO] VERIFICATION PASS: incr_20261010_194632.tar.gz (SHA256: VALID, TAR: VALID)
+[2026-10-10 19:47:03] [INFO] VERIFICATION PASS: incr_20261010_194641.tar.gz (SHA256: VALID, TAR: VALID)
+[2026-10-10 19:47:03] [INFO] Verification Summary: Total: 12 | Passed: 12 | Failed: 0
+[2026-10-10 19:47:04] [SUCCESS] Integrity audit completed: ALL archives verified intact and authentic [OK].
+[2026-10-10 19:47:04] [INFO] [Phase 2] Executing Retention Policy Dry-Run Evaluation (retention.sh --dry-run)...
+[2026-10-10 19:47:04] [INFO] ======================================================================
+[2026-10-10 19:47:04] [INFO] Running NovaTech Backup Retention Policy Enforcement
+[2026-10-10 19:47:04] [INFO] Policy: Retain the 2 most recent Full backups and all associated incrementals
+[2026-10-10 19:47:04] [INFO] Mode  : DRY-RUN (Simulated - No Deletions)
+[2026-10-10 19:47:04] [INFO] ======================================================================
+[2026-10-10 19:47:04] [INFO] Repository scan detected 5 full backup archive(s).
+[2026-10-10 19:47:04] [INFO] Retention demarcation boundary:
+[2026-10-10 19:47:04] [INFO]   Oldest retained full backup: full_20261010_194435.tar.gz
+[2026-10-10 19:47:04] [INFO]   Expired full backup count   : 3
+[2026-10-10 19:47:04] [INFO] Retention Analysis Summary:
+[2026-10-10 19:47:05] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/full_20261010_193845.tar.gz
+[2026-10-10 19:47:05] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/full_20261010_193845.tar.gz.sha256
+[2026-10-10 19:47:05] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/full_20261010_193845.tar.gz.meta
+[2026-10-10 19:47:05] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/full_20261010_193845.tar.gz.snar
+[2026-10-10 19:47:05] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/full_20261010_194300.tar.gz
+[2026-10-10 19:47:06] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/full_20261010_194300.tar.gz.sha256
+[2026-10-10 19:47:06] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/full_20261010_194300.tar.gz.meta
+[2026-10-10 19:47:06] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/full_20261010_194300.tar.gz.snar
+[2026-10-10 19:47:06] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/full_20261010_194405.tar.gz
+[2026-10-10 19:47:06] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/full_20261010_194405.tar.gz.sha256
+[2026-10-10 19:47:06] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/full_20261010_194405.tar.gz.meta
+[2026-10-10 19:47:06] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/full_20261010_194405.tar.gz.snar
+[2026-10-10 19:47:06] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/incr_20261010_193851.tar.gz
+[2026-10-10 19:47:06] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/incr_20261010_193851.tar.gz.sha256
+[2026-10-10 19:47:06] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/incr_20261010_193851.tar.gz.meta
+[2026-10-10 19:47:06] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/incr_20261010_193856.tar.gz
+[2026-10-10 19:47:07] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/incr_20261010_193856.tar.gz.sha256
+[2026-10-10 19:47:07] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/incr_20261010_193856.tar.gz.meta
+[2026-10-10 19:47:07] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/incr_20261010_194002.tar.gz
+[2026-10-10 19:47:07] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/incr_20261010_194002.tar.gz.sha256
+[2026-10-10 19:47:07] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/incr_20261010_194002.tar.gz.meta
+[2026-10-10 19:47:07] [SUCCESS] Retention dry-run completed. No files were modified or deleted.
+[2026-10-10 19:47:07] [INFO] Regenerating comprehensive HTML audit report from live state...
+[2026-10-10 19:47:07] [INFO] Generating live HTML audit report: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/report.html...
+[2026-10-10 19:47:08] [SUCCESS] HTML Report successfully generated at: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/report.html
+[2026-10-10 19:47:08] [INFO] Opening HTML Report (/mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/report.html)...
+[2026-10-10 19:47:09] [INFO] WSL detected. Launching Windows host browser via explorer.exe...
+[2026-10-10 19:47:12] [SUCCESS] All validation tasks executed successfully.
+[2026-10-10 19:47:12] [INFO] View the live report in your browser or run: explorer.exe "$(wslpath -w report.html)"
+[2026-10-10 19:47:25] [INFO] ======================================================================
+[2026-10-10 19:47:25] [INFO] Running NovaTech Backup Retention Policy Enforcement
+[2026-10-10 19:47:25] [INFO] Policy: Retain the 2 most recent Full backups and all associated incrementals
+[2026-10-10 19:47:25] [INFO] Mode  : LIVE (Active Deletion)
+[2026-10-10 19:47:25] [INFO] ======================================================================
+[2026-10-10 19:47:26] [INFO] Repository scan detected 5 full backup archive(s).
+[2026-10-10 19:47:26] [INFO] Retention demarcation boundary:
+[2026-10-10 19:47:26] [INFO]   Oldest retained full backup: full_20261010_194435.tar.gz
+[2026-10-10 19:47:26] [INFO]   Expired full backup count   : 3
+[2026-10-10 19:47:26] [INFO] Retention Analysis Summary:
+[2026-10-10 19:47:29] [INFO] [PURGED] Deleted: full_20261010_193845.tar.gz
+[2026-10-10 19:47:30] [INFO] [PURGED] Deleted: full_20261010_193845.tar.gz.sha256
+[2026-10-10 19:47:32] [INFO] [PURGED] Deleted: full_20261010_193845.tar.gz.meta
+[2026-10-10 19:47:34] [INFO] [PURGED] Deleted: full_20261010_193845.tar.gz.snar
+[2026-10-10 19:47:36] [INFO] [PURGED] Deleted: full_20261010_194300.tar.gz
+[2026-10-10 19:47:37] [INFO] [PURGED] Deleted: full_20261010_194300.tar.gz.sha256
+[2026-10-10 19:47:38] [INFO] [PURGED] Deleted: full_20261010_194300.tar.gz.meta
+[2026-10-10 19:47:39] [INFO] [PURGED] Deleted: full_20261010_194300.tar.gz.snar
+[2026-10-10 19:47:40] [INFO] [PURGED] Deleted: full_20261010_194405.tar.gz
+[2026-10-10 19:47:41] [INFO] [PURGED] Deleted: full_20261010_194405.tar.gz.sha256
+[2026-10-10 19:47:42] [INFO] [PURGED] Deleted: full_20261010_194405.tar.gz.meta
+[2026-10-10 19:47:42] [INFO] [PURGED] Deleted: full_20261010_194405.tar.gz.snar
+[2026-10-10 19:47:43] [INFO] [PURGED] Deleted: incr_20261010_193851.tar.gz
+[2026-10-10 19:47:44] [INFO] [PURGED] Deleted: incr_20261010_193851.tar.gz.sha256
+[2026-10-10 19:47:44] [INFO] [PURGED] Deleted: incr_20261010_193851.tar.gz.meta
+[2026-10-10 19:47:45] [INFO] [PURGED] Deleted: incr_20261010_193856.tar.gz
+[2026-10-10 19:47:46] [INFO] [PURGED] Deleted: incr_20261010_193856.tar.gz.sha256
+[2026-10-10 19:47:46] [INFO] [PURGED] Deleted: incr_20261010_193856.tar.gz.meta
+[2026-10-10 19:47:47] [INFO] [PURGED] Deleted: incr_20261010_194002.tar.gz
+[2026-10-10 19:47:47] [INFO] [PURGED] Deleted: incr_20261010_194002.tar.gz.sha256
+[2026-10-10 19:47:48] [INFO] [PURGED] Deleted: incr_20261010_194002.tar.gz.meta
+[2026-10-10 19:47:48] [SUCCESS] Retention enforcement executed: Purged 21 file(s), reclaimed 50.94 KB.
+[2026-10-10 19:47:49] [INFO] Generating live HTML audit report: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/report.html...
+[2026-10-10 19:47:52] [SUCCESS] HTML Report successfully generated at: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/report.html
+[2026-10-10 19:54:41] [INFO] [Phase 3] Executing Disaster Recovery Validation Suite (recovery_test.sh)...
+[2026-10-10 19:54:42] [INFO] ======================================================================
+[2026-10-10 19:54:42] [INFO] Executing NovaTech Disaster Recovery Verification Suite (CO4 Core)
+[2026-10-10 19:54:42] [INFO] ======================================================================
+[2026-10-10 19:54:42] [INFO] [Setup] Initializing/refreshing pristine department dataset...
+[2026-10-10 19:54:42] [INFO] ======================================================================
+[2026-10-10 19:54:43] [INFO] Phase 1: Generating Fictional Department Dataset (Demonstration Data)
+[2026-10-10 19:54:43] [INFO] ======================================================================
+[2026-10-10 19:54:43] [INFO] Populating Finance department files...
+[2026-10-10 19:54:44] [INFO] Populating Human Resources department files...
+[2026-10-10 19:54:45] [INFO] Populating Engineering department files...
+[2026-10-10 19:54:46] [INFO] Populating Sales department files...
+[2026-10-10 19:54:47] [SUCCESS] Seeding complete: Created 53 fictional enterprise files across 4 departments.
+[2026-10-10 19:54:47] [SUCCESS] Total Source Dataset Size: 19.32 KB
+[2026-10-10 19:54:47] [INFO] [Step 1/6] Executing Baseline FULL Backup...
+[2026-10-10 19:54:48] [INFO] ======================================================================
+[2026-10-10 19:54:48] [INFO] Initiating NovaTech Centralized FULL Backup (Level 0 Baseline)
+[2026-10-10 19:54:48] [INFO] ======================================================================
+[2026-10-10 19:54:48] [INFO] Source validated: 53 files detected across department shares.
+[2026-10-10 19:54:49] [INFO] Repository storage check: 927572 KB free space available (threshold: 20480 KB).
+[2026-10-10 19:54:49] [INFO] Target Archive: full_20261010_195449.tar.gz
+[2026-10-10 19:54:49] [INFO] Snapshot File : /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/active.snar
+[2026-10-10 19:54:50] [INFO] Executing GNU tar Level 0 baseline snapshot...
+[2026-10-10 19:54:52] [INFO] Generating SHA-256 cryptographic checksum manifest...
+[2026-10-10 19:54:52] [INFO] Verifying archive integrity with sha256sum -c and tar -tzf...
+[2026-10-10 19:54:52] [SUCCESS] Integrity verification PASSED: SHA-256 and tar decompression valid.
+[2026-10-10 19:54:52] [SUCCESS] FULL backup completed successfully in 2s.
+[2026-10-10 19:54:52] [SUCCESS] Archive: full_20261010_195449.tar.gz | Size: 14.61 KB | SHA256: 009ae0105374a68c...
+[2026-10-10 19:54:52] [INFO] [Step 2/6] Applying Data Mutation Set 1 & Creating Incremental 1...
+[2026-10-10 19:54:53] [INFO] ======================================================================
+[2026-10-10 19:54:53] [INFO] Phase 1: Mutating Departmental Data (Stage 1)
+[2026-10-10 19:54:53] [INFO] ======================================================================
+[2026-10-10 19:54:53] [INFO] Applying Mutation Set 1 (for Incremental Backup 1)...
+[2026-10-10 19:54:53] [INFO]   [ADD] finance/audit_addendum_q1.csv
+[2026-10-10 19:54:53] [INFO]   [ADD] engineering/hotfix_release_notes_2.4.1.md
+[2026-10-10 19:54:54] [INFO]   [MODIFY] sales/crm_leads_enterprise_q1.csv
+[2026-10-10 19:54:54] [INFO]   [MODIFY] hr/employee_directory.csv
+[2026-10-10 19:54:54] [INFO]   [DELETE] sales/win_loss_analysis_q2.csv
+[2026-10-10 19:54:54] [SUCCESS] Mutation Stage 1 applied cleanly: 2 added, 2 modified, 1 deleted.
+[2026-10-10 19:54:55] [INFO] ======================================================================
+[2026-10-10 19:54:55] [INFO] Initiating NovaTech Centralized INCREMENTAL Backup
+[2026-10-10 19:54:55] [INFO] ======================================================================
+[2026-10-10 19:54:56] [INFO] Baseline full backup verified: full_20261010_195449.tar.gz
+[2026-10-10 19:54:56] [INFO] Active snapshot file detected: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/active.snar
+[2026-10-10 19:54:56] [INFO] Repository storage check: 927544 KB free space available (threshold: 10240 KB).
+[2026-10-10 19:54:56] [INFO] Target Archive: incr_20261010_195456.tar.gz
+[2026-10-10 19:54:56] [INFO] Executing GNU tar incremental snapshot against /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/active.snar...
+[2026-10-10 19:54:57] [INFO] Generating SHA-256 cryptographic checksum manifest...
+[2026-10-10 19:54:57] [INFO] Verifying archive integrity with sha256sum -c and tar -tzf...
+[2026-10-10 19:54:57] [SUCCESS] Integrity verification PASSED: SHA-256 and tar decompression valid.
+[2026-10-10 19:54:57] [SUCCESS] INCREMENTAL backup completed successfully in 1s.
+[2026-10-10 19:54:58] [SUCCESS] Archive: incr_20261010_195456.tar.gz | Size: 2.10 KB | SHA256: b3bb3c5bc4589772... (Parent: full_20261010_195449.tar.gz)
+[2026-10-10 19:54:58] [INFO] [Step 3/6] Applying Data Mutation Set 2 & Creating Incremental 2...
+[2026-10-10 19:54:59] [INFO] ======================================================================
+[2026-10-10 19:54:59] [INFO] Phase 1: Mutating Departmental Data (Stage 2)
+[2026-10-10 19:54:59] [INFO] ======================================================================
+[2026-10-10 19:54:59] [INFO] Applying Mutation Set 2 (for Incremental Backup 2)...
+[2026-10-10 19:54:59] [INFO]   [ADD] hr/wellness_initiative_feedback.csv
+[2026-10-10 19:54:59] [INFO]   [ADD] engineering/api_gateway_routes.json
+[2026-10-10 19:54:59] [INFO]   [MODIFY] engineering/architecture_decision_records.md
+[2026-10-10 19:55:00] [INFO]   [MODIFY] finance/petty_cash_disbursements.csv
+[2026-10-10 19:55:00] [INFO]   [DELETE] finance/investor_deck_notes.md
+[2026-10-10 19:55:00] [SUCCESS] Mutation Stage 2 applied cleanly: 2 added, 2 modified, 1 deleted.
+[2026-10-10 19:55:00] [INFO] ======================================================================
+[2026-10-10 19:55:00] [INFO] Initiating NovaTech Centralized INCREMENTAL Backup
+[2026-10-10 19:55:01] [INFO] ======================================================================
+[2026-10-10 19:55:01] [INFO] Baseline full backup verified: full_20261010_195449.tar.gz
+[2026-10-10 19:55:01] [INFO] Active snapshot file detected: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/active.snar
+[2026-10-10 19:55:01] [INFO] Repository storage check: 927532 KB free space available (threshold: 10240 KB).
+[2026-10-10 19:55:01] [INFO] Target Archive: incr_20261010_195501.tar.gz
+[2026-10-10 19:55:01] [INFO] Executing GNU tar incremental snapshot against /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/active.snar...
+[2026-10-10 19:55:02] [INFO] Generating SHA-256 cryptographic checksum manifest...
+[2026-10-10 19:55:02] [INFO] Verifying archive integrity with sha256sum -c and tar -tzf...
+[2026-10-10 19:55:02] [SUCCESS] Integrity verification PASSED: SHA-256 and tar decompression valid.
+[2026-10-10 19:55:03] [SUCCESS] INCREMENTAL backup completed successfully in 1s.
+[2026-10-10 19:55:03] [SUCCESS] Archive: incr_20261010_195501.tar.gz | Size: 2.01 KB | SHA256: 6d75118fa9f82213... (Parent: full_20261010_195449.tar.gz)
+[2026-10-10 19:55:03] [INFO] [Step 4/6] Generating Pre-Disaster Cryptographic Manifest of Source...
+[2026-10-10 19:55:05] [SUCCESS] Pre-disaster snapshot indexed: 51 files recorded.
+[2026-10-10 19:55:05] [INFO] [Step 5/6] Simulating Catastrophic Data Loss in Source Sandbox...
+[2026-10-10 19:55:05] [WARN]   [DISASTER SIMULATION] Purging entire department share: source/sales/
+[2026-10-10 19:55:06] [WARN]   [DISASTER SIMULATION] Corrupting critical technical asset: source/engineering/architecture_decision_records.md
+[2026-10-10 19:55:07] [WARN] Disaster effect: File count dropped from 51 to 40 files.
+[2026-10-10 19:55:07] [INFO] [Step 6/6] Executing Full Chain Disaster Restoration...
+[2026-10-10 19:55:09] [INFO] ======================================================================
+[2026-10-10 19:55:09] [INFO] Initiating NovaTech Centralized Recovery & Restoration Engine
+[2026-10-10 19:55:09] [INFO] Target Directory: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/restore_target
+[2026-10-10 19:55:09] [INFO] ======================================================================
+[2026-10-10 19:55:09] [INFO] Identified Baseline Full Backup: full_20261010_195449.tar.gz (Timestamp: 20261010_195449)
+[2026-10-10 19:55:10] [INFO] Identified 2 incremental backup archive(s) in recovery chain.
+[2026-10-10 19:55:10] [INFO] Executing Pre-Flight Cryptographic Checksum Verification...
+[2026-10-10 19:55:10] [INFO]   Verifying: full_20261010_195449.tar.gz...
+[2026-10-10 19:55:10] [INFO]   Verifying: incr_20261010_195456.tar.gz...
+[2026-10-10 19:55:10] [INFO]   Verifying: incr_20261010_195501.tar.gz...
+[2026-10-10 19:55:10] [SUCCESS] Pre-Flight Verification PASSED: All 3 archive(s) verified authentic.
+[2026-10-10 19:55:11] [INFO] Stage 1: Extracting Full Baseline (full_20261010_195449.tar.gz) into target sandbox...
+[2026-10-10 19:55:13] [SUCCESS] Full baseline restored successfully.
+[2026-10-10 19:55:13] [INFO] Stage 2: Replaying 2 incremental archive(s)...
+[2026-10-10 19:55:13] [INFO]   Replaying [1/2]: incr_20261010_195456.tar.gz...
+[2026-10-10 19:55:15] [INFO]   Replaying [2/2]: incr_20261010_195501.tar.gz...
+[2026-10-10 19:55:15] [SUCCESS] All incremental revisions replayed successfully.
+[2026-10-10 19:55:16] [SUCCESS] Point-in-Time Restoration Complete in 5s.
+[2026-10-10 19:55:16] [SUCCESS] Target Directory : /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/restore_target
+[2026-10-10 19:55:16] [SUCCESS] Restored Files   : 51 files (19.45 KB)
+[2026-10-10 19:55:16] [INFO] Analyzing restored dataset against pre-disaster cryptographic manifest...
+[2026-10-10 19:55:22] [INFO] Directory level check: Restored structure is healthy.
+[2026-10-10 19:55:22] [SUCCESS] RECOVERY AUDIT VERDICT: PASS (100% Data Fidelity Preserved)
+[2026-10-10 19:55:22] [INFO] ------------------------------------------------------------------
+[2026-10-10 19:55:22] [INFO] Demonstrating Resilient Detection of Corrupted Archive
+[2026-10-10 19:55:22] [INFO] ------------------------------------------------------------------
+[2026-10-10 19:55:22] [INFO] Creating test clone of archive: incr_20261010_195501.tar.gz -> corrupt_tamper_demo.tar.gz
+[2026-10-10 19:55:22] [INFO] Injecting deliberate bit-flip corruption at offset 128 (dd conv=notrunc)...
+[2026-10-10 19:55:22] [INFO] Running verify_backup.sh against tampered archive...
+[2026-10-10 19:55:23] [INFO] ======================================================================
+[2026-10-10 19:55:23] [INFO] Running NovaTech Backup Integrity Verification
+[2026-10-10 19:55:23] [INFO] ======================================================================
+[2026-10-10 19:55:23] [INFO] Evaluating 1 archive(s) for cryptographic and structural validity...
+[2026-10-10 19:55:23] [ERROR] VERIFICATION FAILED: corrupt_tamper_demo.tar.gz (SHA256: MISMATCH, TAR: CORRUPT)
+[2026-10-10 19:55:23] [INFO] Verification Summary: Total: 1 | Passed: 0 | Failed: 1
+[2026-10-10 19:55:23] [ERROR] Integrity audit completed with ERRORS: 1 archive(s) CORRUPT.
+[2026-10-10 19:55:23] [SUCCESS] CORRUPTION DETECTED PROMPTLY: Verification engine blocked corrupted archive [OK].
+[2026-10-10 19:55:23] [INFO] Corrupted demo archive safely cleaned up.
+[2026-10-10 19:55:24] [INFO] [Phase 2] Executing Full Repository Integrity Verification (verify_backup.sh)...
+[2026-10-10 19:55:24] [INFO] ======================================================================
+[2026-10-10 19:55:24] [INFO] Running NovaTech Backup Integrity Verification
+[2026-10-10 19:55:24] [INFO] ======================================================================
+[2026-10-10 19:55:24] [INFO] Evaluating 9 archive(s) for cryptographic and structural validity...
+[2026-10-10 19:55:24] [INFO] VERIFICATION PASS: full_20261010_194435.tar.gz (SHA256: VALID, TAR: VALID)
+[2026-10-10 19:55:24] [INFO] VERIFICATION PASS: full_20261010_194622.tar.gz (SHA256: VALID, TAR: VALID)
+[2026-10-10 19:55:25] [INFO] VERIFICATION PASS: full_20261010_195449.tar.gz (SHA256: VALID, TAR: VALID)
+[2026-10-10 19:55:25] [INFO] VERIFICATION PASS: incr_20261010_194441.tar.gz (SHA256: VALID, TAR: VALID)
+[2026-10-10 19:55:25] [INFO] VERIFICATION PASS: incr_20261010_194446.tar.gz (SHA256: VALID, TAR: VALID)
+[2026-10-10 19:55:25] [INFO] VERIFICATION PASS: incr_20261010_194632.tar.gz (SHA256: VALID, TAR: VALID)
+[2026-10-10 19:55:25] [INFO] VERIFICATION PASS: incr_20261010_194641.tar.gz (SHA256: VALID, TAR: VALID)
+[2026-10-10 19:55:26] [INFO] VERIFICATION PASS: incr_20261010_195456.tar.gz (SHA256: VALID, TAR: VALID)
+[2026-10-10 19:55:26] [INFO] VERIFICATION PASS: incr_20261010_195501.tar.gz (SHA256: VALID, TAR: VALID)
+[2026-10-10 19:55:26] [INFO] Verification Summary: Total: 9 | Passed: 9 | Failed: 0
+[2026-10-10 19:55:26] [SUCCESS] Integrity audit completed: ALL archives verified intact and authentic [OK].
+[2026-10-10 19:55:26] [INFO] [Phase 2] Executing Retention Policy Dry-Run Evaluation (retention.sh --dry-run)...
+[2026-10-10 19:55:26] [INFO] ======================================================================
+[2026-10-10 19:55:26] [INFO] Running NovaTech Backup Retention Policy Enforcement
+[2026-10-10 19:55:26] [INFO] Policy: Retain the 2 most recent Full backups and all associated incrementals
+[2026-10-10 19:55:26] [INFO] Mode  : DRY-RUN (Simulated - No Deletions)
+[2026-10-10 19:55:26] [INFO] ======================================================================
+[2026-10-10 19:55:26] [INFO] Repository scan detected 3 full backup archive(s).
+[2026-10-10 19:55:26] [INFO] Retention demarcation boundary:
+[2026-10-10 19:55:26] [INFO]   Oldest retained full backup: full_20261010_194622.tar.gz
+[2026-10-10 19:55:26] [INFO]   Expired full backup count   : 1
+[2026-10-10 19:55:27] [INFO] Retention Analysis Summary:
+[2026-10-10 19:55:27] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/full_20261010_194435.tar.gz
+[2026-10-10 19:55:28] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/full_20261010_194435.tar.gz.sha256
+[2026-10-10 19:55:28] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/full_20261010_194435.tar.gz.meta
+[2026-10-10 19:55:28] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/full_20261010_194435.tar.gz.snar
+[2026-10-10 19:55:28] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/incr_20261010_194441.tar.gz
+[2026-10-10 19:55:28] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/incr_20261010_194441.tar.gz.sha256
+[2026-10-10 19:55:28] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/incr_20261010_194441.tar.gz.meta
+[2026-10-10 19:55:28] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/incr_20261010_194446.tar.gz
+[2026-10-10 19:55:28] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/incr_20261010_194446.tar.gz.sha256
+[2026-10-10 19:55:28] [INFO] [DRY-RUN SIMULATION] Would delete: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/incr_20261010_194446.tar.gz.meta
+[2026-10-10 19:55:28] [SUCCESS] Retention dry-run completed. No files were modified or deleted.
+[2026-10-10 19:55:29] [INFO] Regenerating comprehensive HTML audit report from live state...
+[2026-10-10 19:55:29] [INFO] Generating live HTML audit report: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/report.html...
+[2026-10-10 19:55:30] [SUCCESS] HTML Report successfully generated at: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/report.html
+[2026-10-10 19:55:30] [INFO] Opening HTML Report (/mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/report.html)...
+[2026-10-10 19:55:30] [INFO] WSL detected. Launching Windows host browser via explorer.exe...
+[2026-10-10 19:55:33] [SUCCESS] All validation tasks executed successfully.
+[2026-10-10 19:55:33] [INFO] View the live report in your browser or run: explorer.exe "$(wslpath -w report.html)"
+[2026-10-11 00:26:47] [WARN] This script safely purges external system modifications:
+[2026-10-11 00:26:47] [WARN]   1. Removes tagged crontab schedules (# LSA_SPRINT_TEST)
+[2026-10-11 00:26:48] [WARN]   2. Purges test service user 'lsatest_backupadmin' and group 'lsatest_backup_ops'
+[2026-10-11 00:26:48] [WARN]   3. Unmounts loop filesystem at sandbox_data/repo_mount/
+[2026-10-11 00:26:48] [WARN]   4. Detaches loop device and deletes backup_disk.img
+[2026-10-11 00:26:48] [INFO] NOTE: Logs, documentation, scripts, and report.html are preserved as evidence.
+[2026-10-11 00:26:48] [INFO] [Step 1/4] Cleaning tagged crontab entries...
+[2026-10-11 00:26:49] [SUCCESS] Crontab restored: Pre-existing user schedules preserved, tagged entries purged.
+[2026-10-11 00:26:49] [INFO] [Step 2/4] Removing test service account and group...
+[2026-10-11 00:26:49] [INFO] Deleting user lsatest_backupadmin...
+[2026-10-11 00:26:49] [SUCCESS] User lsatest_backupadmin deleted.
+[2026-10-11 00:26:49] [INFO] Deleting group lsatest_backup_ops...
+[2026-10-11 00:26:49] [SUCCESS] Group lsatest_backup_ops deleted.
+[2026-10-11 00:26:49] [INFO] [Step 3/4] Unmounting dedicated backup storage volume...
+[2026-10-11 00:26:50] [INFO] Unmounting /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo_mount...
+[2026-10-11 00:26:51] [SUCCESS] Filesystem unmounted from /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo_mount.
+[2026-10-11 00:26:51] [INFO] Detaching verified loop device: /dev/loop0...
+[2026-10-11 00:26:53] [SUCCESS] Loop device /dev/loop0 detached.
+[2026-10-11 00:26:53] [INFO] Deleting sparse image: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/backup_disk.img...
+[2026-10-11 00:26:54] [SUCCESS] Disk image removed.
+[2026-10-11 00:26:54] [INFO] ======================================================================
+[2026-10-11 00:26:55] [INFO] Teardown Verification Audit
+[2026-10-11 00:26:55] [INFO] ======================================================================
+[2026-10-11 00:26:56] [SUCCESS] Cleanup execution finished. System restored to pristine baseline.

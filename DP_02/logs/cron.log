@@ -1,0 +1,13 @@
+[0;34m[2026-10-10 19:40:01] [INFO][0m ======================================================================
+[0;34m[2026-10-10 19:40:01] [INFO][0m Initiating NovaTech Centralized INCREMENTAL Backup
+[0;34m[2026-10-10 19:40:01] [INFO][0m ======================================================================
+[0;34m[2026-10-10 19:40:02] [INFO][0m Baseline full backup verified: full_20261010_193845.tar.gz
+[0;34m[2026-10-10 19:40:02] [INFO][0m Active snapshot file detected: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/active.snar
+[0;34m[2026-10-10 19:40:02] [INFO][0m Repository storage check: 927584 KB free space available (threshold: 10240 KB).
+[0;34m[2026-10-10 19:40:02] [INFO][0m Target Archive: incr_20261010_194002.tar.gz
+[0;34m[2026-10-10 19:40:02] [INFO][0m Executing GNU tar incremental snapshot against /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_02/sandbox_data/repo/.meta/active.snar...
+[0;34m[2026-10-10 19:40:04] [INFO][0m Generating SHA-256 cryptographic checksum manifest...
+[0;34m[2026-10-10 19:40:04] [INFO][0m Verifying archive integrity with sha256sum -c and tar -tzf...
+[0;32m[2026-10-10 19:40:05] [SUCCESS][0m Integrity verification PASSED: SHA-256 and tar decompression valid.
+[0;32m[2026-10-10 19:40:05] [SUCCESS][0m INCREMENTAL backup completed successfully in 2s.
+[0;32m[2026-10-10 19:40:05] [SUCCESS][0m Archive: incr_20261010_194002.tar.gz | Size: 1020 B | SHA256: bb35cf7b19e88c27... (Parent: full_20261010_193845.tar.gz)

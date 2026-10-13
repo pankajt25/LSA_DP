@@ -1,0 +1,162 @@
+================================================================================
+Phase 3 ACL Configuration Audit: 2026-10-12 20:00:34
+================================================================================
+=== BASELINE GETFACL STATE (BEFORE) ===
+--- finance ---
+# file: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_03/sandbox_data/mnt/fileserver/finance
+# owner: root
+# group: lsatest_grp_finance
+# flags: -s-
+user::rwx
+group::rwx
+group:lsatest_grp_finance:rwx
+group:lsatest_grp_audit:r-x
+mask::rwx
+other::---
+default:user::rwx
+default:group::rwx
+default:group:lsatest_grp_finance:rwx
+default:group:lsatest_grp_audit:r-x
+default:mask::rwx
+default:other::---
+
+--- hr ---
+# file: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_03/sandbox_data/mnt/fileserver/hr
+# owner: root
+# group: lsatest_grp_hr
+# flags: -s-
+user::rwx
+group::rwx
+group:lsatest_grp_hr:rwx
+group:lsatest_grp_audit:r-x
+mask::rwx
+other::---
+default:user::rwx
+default:group::rwx
+default:group:lsatest_grp_hr:rwx
+default:group:lsatest_grp_audit:r-x
+default:mask::rwx
+default:other::---
+
+--- eng ---
+# file: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_03/sandbox_data/mnt/fileserver/eng
+# owner: root
+# group: lsatest_grp_eng
+# flags: -s-
+user::rwx
+group::rwx
+group:lsatest_grp_eng:rwx
+group:lsatest_grp_audit:r-x
+mask::rwx
+other::---
+default:user::rwx
+default:group::rwx
+default:group:lsatest_grp_eng:rwx
+default:group:lsatest_grp_audit:r-x
+default:mask::rwx
+default:other::---
+
+--- sales ---
+# file: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_03/sandbox_data/mnt/fileserver/sales
+# owner: root
+# group: lsatest_grp_sales
+# flags: -s-
+user::rwx
+group::rwx
+group:lsatest_grp_sales:rwx
+group:lsatest_grp_audit:r-x
+mask::rwx
+other::---
+default:user::rwx
+default:group::rwx
+default:group:lsatest_grp_sales:rwx
+default:group:lsatest_grp_audit:r-x
+default:mask::rwx
+default:other::---
+
+
+=== UPDATED GETFACL STATE (AFTER) ===
+--- finance ---
+# file: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_03/sandbox_data/mnt/fileserver/finance
+# owner: root
+# group: lsatest_grp_finance
+# flags: -s-
+user::rwx
+group::rwx
+group:lsatest_grp_finance:rwx
+group:lsatest_grp_audit:r-x
+mask::rwx
+other::---
+default:user::rwx
+default:group::rwx
+default:group:lsatest_grp_finance:rwx
+default:group:lsatest_grp_audit:r-x
+default:mask::rwx
+default:other::---
+
+--- hr ---
+# file: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_03/sandbox_data/mnt/fileserver/hr
+# owner: root
+# group: lsatest_grp_hr
+# flags: -s-
+user::rwx
+group::rwx
+group:lsatest_grp_hr:rwx
+group:lsatest_grp_audit:r-x
+mask::rwx
+other::---
+default:user::rwx
+default:group::rwx
+default:group:lsatest_grp_hr:rwx
+default:group:lsatest_grp_audit:r-x
+default:mask::rwx
+default:other::---
+
+--- eng ---
+# file: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_03/sandbox_data/mnt/fileserver/eng
+# owner: root
+# group: lsatest_grp_eng
+# flags: -s-
+user::rwx
+group::rwx
+group:lsatest_grp_eng:rwx
+group:lsatest_grp_audit:r-x
+mask::rwx
+other::---
+default:user::rwx
+default:group::rwx
+default:group:lsatest_grp_eng:rwx
+default:group:lsatest_grp_audit:r-x
+default:mask::rwx
+default:other::---
+
+--- sales ---
+# file: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_03/sandbox_data/mnt/fileserver/sales
+# owner: root
+# group: lsatest_grp_sales
+# flags: -s-
+user::rwx
+group::rwx
+group:lsatest_grp_sales:rwx
+group:lsatest_grp_audit:r-x
+mask::rwx
+other::---
+default:user::rwx
+default:group::rwx
+default:group:lsatest_grp_sales:rwx
+default:group:lsatest_grp_audit:r-x
+default:mask::rwx
+default:other::---
+
+
+=== DYNAMIC INHERITANCE TEST FILE GETFACL ===
+# file: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_03/sandbox_data/mnt/fileserver/finance/acl_inheritance_demo.txt
+# owner: lsatest_fin_alice
+# group: lsatest_grp_finance
+user::rw-
+group::rwx	#effective:rw-
+group:lsatest_grp_finance:rwx	#effective:rw-
+group:lsatest_grp_audit:r-x	#effective:r--
+mask::rw-
+other::---
+

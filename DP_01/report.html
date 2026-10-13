@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovaTech Solutions — Enterprise Storage Infrastructure Audit Report</title>
+    <style>
+        :root {
+            --bg-base: #0b0f19;
+            --bg-card: #151d30;
+            --bg-card-hover: #1c2740;
+            --border: #23314e;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-blue: #38bdf8;
+            --accent-green: #34d399;
+            --accent-purple: #c084fc;
+            --accent-yellow: #fbbf24;
+            --accent-red: #f87171;
+            --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+        }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        header {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+        }
+        .brand-title h1 {
+            font-size: 1.85rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.25rem;
+        }
+        .brand-title p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        .meta-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.65rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+        }
+        .badge-blue { background: rgba(56, 189, 248, 0.15); color: var(--accent-blue); border: 1px solid rgba(56, 189, 248, 0.3); }
+        .badge-green { background: rgba(52, 211, 153, 0.15); color: var(--accent-green); border: 1px solid rgba(52, 211, 153, 0.3); }
+        .badge-purple { background: rgba(192, 132, 252, 0.15); color: var(--accent-purple); border: 1px solid rgba(192, 132, 252, 0.3); }
+        .badge-yellow { background: rgba(251, 191, 36, 0.15); color: var(--accent-yellow); border: 1px solid rgba(251, 191, 36, 0.3); }
+        .badge-red { background: rgba(248, 113, 113, 0.15); color: var(--accent-red); border: 1px solid rgba(248, 113, 113, 0.3); }
+        .badge-cyan { background: rgba(6, 182, 212, 0.15); color: #22d3ee; border: 1px solid rgba(6, 182, 212, 0.3); }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+        }
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            background-color: var(--bg-card-hover);
+        }
+        .card-label {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+        .card-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        .card-subtext {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            margin-top: 0.35rem;
+        }
+
+        .section-panel {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+        }
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.75rem;
+        }
+        .panel-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        th, td {
+            padding: 0.85rem 1rem;
+            text-align: left;
+        }
+        th {
+            background-color: rgba(255, 255, 255, 0.03);
+            color: var(--text-secondary);
+            font-weight: 600;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        td {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        tr:hover td {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+        code {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            background: rgba(0, 0, 0, 0.35);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .usage-bar-bg {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            height: 6px;
+            width: 100%;
+            margin-top: 4px;
+            overflow: hidden;
+        }
+        .usage-bar-fill {
+            background: var(--accent-green);
+            height: 100%;
+        }
+
+        pre.log-viewer {
+            background: #060911;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            color: #cbd5e1;
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            overflow-x: auto;
+            max-height: 280px;
+            white-space: pre-wrap;
+            line-height: 1.4;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="brand-title">
+                <h1>NovaTech Solutions — Enterprise Storage Infrastructure</h1>
+                <p>Linux System Administration (E1ITA307) — Modules: III, IV | CO3, CO4 Deployment Project</p>
+            </div>
+            <div class="meta-tags">
+                <span class="badge badge-purple">Ubuntu 26.04.1 LTS</span>
+                <span class="badge badge-blue">Host: SP</span>
+                <span class="badge badge-cyan">Kernel: 6.18.40.1-microsoft-standard-WSL2</span>
+                <span class="badge badge-green">LIVE AUDIT REPORT</span>
+            </div>
+        </header>
+
+        <!-- Top Summary Cards -->
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-label">Volume Group Capacity</div>
+                <div class="card-value">44.99g</div>
+                <div class="card-subtext">6.99g unallocated reserve</div>
+            </div>
+            <div class="card">
+                <div class="card-label">Logical Volumes</div>
+                <div class="card-value">4 LVs</div>
+                <div class="card-subtext">HR, Finance, Eng, Sales</div>
+            </div>
+            <div class="card">
+                <div class="card-label">Live Online Elasticity</div>
+                <div class="card-value" style="font-size: 1.4rem; color: var(--accent-green);">15 GiB &rarr; 20 GiB</div>
+                <div class="card-subtext">Online XFS expansion (+5G)</div>
+            </div>
+            <div class="card">
+                <div class="card-label">Infrastructure Validation</div>
+                <div class="card-value" style="color: var(--accent-green);">25 / 25 Tests</div>
+                <div class="card-subtext">Requirements Met [PASS]</div>
+            </div>
+        </div>
+
+        <!-- Section 1: Logical Volumes & Filesystem Hierarchy Table -->
+        <div class="section-panel">
+            <div class="panel-header">
+                <div class="panel-title">
+                    <span>💽</span> Logical Volume & Department Filesystem Hierarchy
+                </div>
+                <span class="badge badge-blue">LVM2 ELASTIC STORAGE</span>
+            </div>
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Device Path</th>
+                            <th>LV Size</th>
+                            <th>Filesystem</th>
+                            <th>Sandbox Mount Point</th>
+                            <th>Status</th>
+                            <th>Disk Usage</th>
+                            <th>Department RBAC Group</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+        <td><code>/dev/company_vg/lv_hr</code></td>
+        <td><strong>N/A</strong></td>
+        <td><span class="badge badge-blue">ext4</span></td>
+        <td><code>/mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_01/sandbox_data/mnt/hr</code></td>
+        <td><span class="badge badge-red">UNMOUNTED</span></td>
+        <td>0 (0%)
+            <div class="usage-bar-bg"><div class="usage-bar-fill" style="width: 0%;"></div></div>
+        </td>
+        <td><code>lsatest_hr_team</code></td>
+    </tr><tr>
+        <td><code>/dev/company_vg/lv_finance</code></td>
+        <td><strong>N/A</strong></td>
+        <td><span class="badge badge-blue">ext4</span></td>
+        <td><code>/mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_01/sandbox_data/mnt/finance</code></td>
+        <td><span class="badge badge-red">UNMOUNTED</span></td>
+        <td>0 (0%)
+            <div class="usage-bar-bg"><div class="usage-bar-fill" style="width: 0%;"></div></div>
+        </td>
+        <td><code>lsatest_finance_team</code></td>
+    </tr><tr>
+        <td><code>/dev/company_vg/lv_eng</code></td>
+        <td><strong>N/A</strong></td>
+        <td><span class="badge badge-purple">xfs</span></td>
+        <td><code>/mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_01/sandbox_data/mnt/eng</code></td>
+        <td><span class="badge badge-red">UNMOUNTED</span></td>
+        <td>0 (0%)
+            <div class="usage-bar-bg"><div class="usage-bar-fill" style="width: 0%;"></div></div>
+        </td>
+        <td><code>lsatest_eng_team</code></td>
+    </tr><tr>
+        <td><code>/dev/company_vg/lv_sales</code></td>
+        <td><strong>N/A</strong></td>
+        <td><span class="badge badge-blue">ext4</span></td>
+        <td><code>/mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_01/sandbox_data/mnt/sales</code></td>
+        <td><span class="badge badge-red">UNMOUNTED</span></td>
+        <td>0 (0%)
+            <div class="usage-bar-bg"><div class="usage-bar-fill" style="width: 0%;"></div></div>
+        </td>
+        <td><code>lsatest_sales_team</code></td>
+    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Section 2: Online Elasticity & Live Volume Expansion Panel -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+            <div class="section-panel" style="margin-bottom: 0;">
+                <div class="panel-header">
+                    <div class="panel-title"><span>📈</span> Live Online Elasticity Demonstration</div>
+                    <span class="badge badge-green">ZERO DOWNTIME</span>
+                </div>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">
+                    Engineering department required emergency capacity expansion. Volume was expanded live without unmounting:
+                </p>
+                <div style="font-size: 0.95rem; line-height: 2;">
+                    <div><strong>Initial LV Allocation:</strong> <code>15 GiB</code> (15,360 MiB)</div>
+                    <div><strong>LVM Online Extension:</strong> <code>lvextend -L 20G /dev/company_vg/lv_eng</code></div>
+                    <div><strong>XFS Live Grow:</strong> <code>xfs_growfs sandbox_data/mnt/eng</code></div>
+                    <div><strong>Expanded Capacity:</strong> <span style="color: var(--accent-green); font-weight: bold;">20 GiB</span> (20,480 MiB)</div>
+                    <div><strong>Result:</strong> Zero service interruption, 100% data integrity preserved.</div>
+                </div>
+            </div>
+
+            <div class="section-panel" style="margin-bottom: 0;">
+                <div class="panel-header">
+                    <div class="panel-title"><span>🛡️</span> Security & RBAC Isolation</div>
+                    <span class="badge badge-yellow">MODE 2770 + POSIX ACL</span>
+                </div>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">
+                    Enterprise directory isolation enforced using SetGID and POSIX Default Access Control Lists:
+                </p>
+                <div style="font-size: 0.95rem; line-height: 2;">
+                    <div><strong>Directory Permissions:</strong> <code>chmod 2770</code> (SetGID bit active)</div>
+                    <div><strong>Group Inheritance:</strong> New files automatically inherit department group</div>
+                    <div><strong>POSIX Default ACL:</strong> <code>setfacl -d -m g::rwx</code></div>
+                    <div><strong>Negative Access Check:</strong> Cross-departmental unauthorized access strictly blocked</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Departmental Backup Repository Inventory -->
+        <div class="section-panel">
+            <div class="panel-header">
+                <div class="panel-title">
+                    <span>📦</span> Departmental Backup Repository Inventory
+                </div>
+                <span class="badge badge-cyan">CRYPTOGRAPHICALLY VERIFIED</span>
+            </div>
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Department</th>
+                            <th>Archive Filename</th>
+                            <th>Size</th>
+                            <th>SHA-256 Checksum</th>
+                            <th>Integrity Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                <td><span class="badge badge-cyan">ENG</span></td>
+                <td><code>eng_backup_20261011_001423.tar.gz</code></td>
+                <td>273 B</td>
+                <td><code title="58b4972243e2f8253f892a9dd0b0ef07b17ffc113894677568d8e884092f7ddf">58b4972243e2f825...</code></td>
+                <td><span class="badge badge-green">VERIFIED [OK]</span></td>
+            </tr><tr>
+                <td><span class="badge badge-cyan">ENG</span></td>
+                <td><code>eng_backup_20261011_005131.tar.gz</code></td>
+                <td>271 B</td>
+                <td><code title="5a38b6bcbdca6917f767c44ae66f98f2bf6f748aac2819468a4f9f2808ba94a0">5a38b6bcbdca6917...</code></td>
+                <td><span class="badge badge-green">VERIFIED [OK]</span></td>
+            </tr><tr>
+                <td><span class="badge badge-cyan">FINANCE</span></td>
+                <td><code>finance_backup_20261011_001423.tar.gz</code></td>
+                <td>296 B</td>
+                <td><code title="7d9562c3c1db91f60d9592fc040e7007aee4745f7d90105aa86a454ba932e7fc">7d9562c3c1db91f6...</code></td>
+                <td><span class="badge badge-green">VERIFIED [OK]</span></td>
+            </tr><tr>
+                <td><span class="badge badge-cyan">FINANCE</span></td>
+                <td><code>finance_backup_20261011_005131.tar.gz</code></td>
+                <td>294 B</td>
+                <td><code title="a694869868106a0d0aa465df0e50df65bf92e0cd1b63accb059fb5a4184edf73">a694869868106a0d...</code></td>
+                <td><span class="badge badge-green">VERIFIED [OK]</span></td>
+            </tr><tr>
+                <td><span class="badge badge-cyan">HR</span></td>
+                <td><code>hr_backup_20261011_001423.tar.gz</code></td>
+                <td>290 B</td>
+                <td><code title="1b9d70e4b3b709b42db5b30ff6df4c82ef03adb4bbea8ba135947190b4f58d66">1b9d70e4b3b709b4...</code></td>
+                <td><span class="badge badge-green">VERIFIED [OK]</span></td>
+            </tr><tr>
+                <td><span class="badge badge-cyan">HR</span></td>
+                <td><code>hr_backup_20261011_005131.tar.gz</code></td>
+                <td>285 B</td>
+                <td><code title="71f34cc1ccb8ac3858661a6e976b37d17285610eb973899eb07ceb5618e7336d">71f34cc1ccb8ac38...</code></td>
+                <td><span class="badge badge-green">VERIFIED [OK]</span></td>
+            </tr><tr>
+                <td><span class="badge badge-cyan">SALES</span></td>
+                <td><code>sales_backup_20261011_001423.tar.gz</code></td>
+                <td>282 B</td>
+                <td><code title="cae48721d66ed69a1d42528ba3481299cabacd61b07f56622728acba9e479fe5">cae48721d66ed69a...</code></td>
+                <td><span class="badge badge-green">VERIFIED [OK]</span></td>
+            </tr><tr>
+                <td><span class="badge badge-cyan">SALES</span></td>
+                <td><code>sales_backup_20261011_005131.tar.gz</code></td>
+                <td>285 B</td>
+                <td><code title="0c2dd470fcc61ba5a7e4d341d3d212b19b1fe86cf654030a5a8554b918667f12">0c2dd470fcc61ba5...</code></td>
+                <td><span class="badge badge-green">VERIFIED [OK]</span></td>
+            </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Section 4: Operational Log Stream -->
+        <div class="section-panel">
+            <div class="panel-header">
+                <div class="panel-title">
+                    <span>📋</span> Deployment Execution Log (logs/storage_deploy.log)
+                </div>
+                <span class="badge badge-blue">TAIL -N 20</span>
+            </div>
+            <pre class="log-viewer">[2026-10-11 00:52:16] [INFO]   Removing Volume Group company_vg...
+[2026-10-11 00:52:17] [SUCCESS] Volume group company_vg removed.
+[2026-10-11 00:52:17] [INFO] [Step 3/5] Detaching loop devices and wiping Physical Volumes...
+[2026-10-11 00:52:17] [INFO]   Wiping PV and detaching loop device: /dev/loop0...
+[2026-10-11 00:52:18] [SUCCESS]   Loop device /dev/loop0 detached.
+[2026-10-11 00:52:18] [INFO]   Deleting disk image: disk1.img...
+[2026-10-11 00:52:20] [INFO]   Wiping PV and detaching loop device: /dev/loop1...
+[2026-10-11 00:52:20] [SUCCESS]   Loop device /dev/loop1 detached.
+[2026-10-11 00:52:20] [INFO]   Deleting disk image: disk2.img...
+[2026-10-11 00:52:20] [INFO]   Wiping PV and detaching loop device: /dev/loop2...
+[2026-10-11 00:52:22] [SUCCESS]   Loop device /dev/loop2 detached.
+[2026-10-11 00:52:22] [INFO]   Deleting disk image: disk3.img...
+[2026-10-11 00:52:23] [INFO] [Step 4/5] Removing lsatest_ test user accounts and groups...
+[2026-10-11 00:52:25] [SUCCESS] All lsatest_ test users and groups purged.
+[2026-10-11 00:52:25] [INFO] [Step 5/5] Purging tagged crontab lines (# LSA_SPRINT_TEST)...
+[2026-10-11 00:52:25] [INFO] ======================================================================
+[2026-10-11 00:52:25] [INFO] Teardown Verification Audit
+[2026-10-11 00:52:25] [INFO] ======================================================================
+[2026-10-11 00:52:26] [SUCCESS] Teardown finished cleanly. System restored to baseline.
+[2026-10-13 17:13:42] [INFO] Generating live HTML audit report: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_01/report.html...</pre>
+        </div>
+
+        <footer>
+            NovaTech Solutions &bull; Enterprise Storage Infrastructure &bull; Automated Deployment Report &bull; Generated: 2026-10-13 17:13:42 IST
+        </footer>
+    </div>
+</body>
+</html>

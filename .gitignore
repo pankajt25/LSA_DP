@@ -1,0 +1,12 @@
+# Storage disk images
+*.img
+
+# Generated submission archives & hashes
+*.tar.gz
+*.zip
+*.sha256
+
+# Temporary & OS files
+.DS_Store
+*.tmp
+*.swp

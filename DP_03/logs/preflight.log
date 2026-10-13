@@ -1,0 +1,35 @@
+================================================================================
+Phase 0 Preflight Audit Execution: 2026-10-12 20:00:30
+================================================================================
+Kernel Release: 6.18.40.1-microsoft-standard-WSL2
+Sudo Access: PASS
+Package acl: INSTALLED (2.3.2-2)
+Package quota: INSTALLED (4.09-1build1)
+Tool setquota: AVAILABLE at /usr/sbin/setquota
+Tool quotacheck: AVAILABLE at /usr/sbin/quotacheck
+Tool quotaon: AVAILABLE at /usr/sbin/quotaon
+Tool quotaoff: AVAILABLE at /usr/sbin/quotaoff
+Tool repquota: AVAILABLE at /usr/sbin/repquota
+Tool quota: AVAILABLE at /usr/bin/quota
+Tool getfacl: AVAILABLE at /usr/bin/getfacl
+Tool setfacl: AVAILABLE at /usr/bin/setfacl
+Tool losetup: AVAILABLE at /usr/sbin/losetup
+Tool mkfs.ext4: AVAILABLE at /usr/sbin/mkfs.ext4
+Tool tune2fs: AVAILABLE at /usr/sbin/tune2fs
+Tool findmnt: AVAILABLE at /usr/bin/findmnt
+total 0
+dr-xr-xr-x 1 root root 0 Oct 12 19:36 .
+dr-xr-xr-x 1 root root 0 Oct 12 19:30 ..
+-r--r--r-- 1 root root 0 Oct 12 19:36 allocated_dquots
+-r--r--r-- 1 root root 0 Oct 12 19:36 cache_hits
+-r--r--r-- 1 root root 0 Oct 12 19:36 drops
+-r--r--r-- 1 root root 0 Oct 12 19:36 free_dquots
+-r--r--r-- 1 root root 0 Oct 12 19:36 lookups
+-r--r--r-- 1 root root 0 Oct 12 19:36 reads
+-r--r--r-- 1 root root 0 Oct 12 19:36 syncs
+-r--r--r-- 1 root root 0 Oct 12 19:36 writes
+	ext4
+	xfs
+nodev	selinuxfs
+Loopback Subsystem: AVAILABLE (/dev/loop1)
+Decision: QUOTA_MODE=native

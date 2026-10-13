@@ -1,0 +1,15 @@
+# Sandbox runtime data and active mount points
+sandbox_data/
+
+# Storage disk images
+*.img
+
+# Generated archive bundles
+*.tar.gz
+*.zip
+*.sha256
+
+# Temporary & OS files
+.DS_Store
+*.tmp
+*.swp

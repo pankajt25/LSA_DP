@@ -1,0 +1,26 @@
+================================================================================
+Phase 4 Quota Allocation Audit: 2026-10-12 20:00:37
+================================================================================
+*** Report for user quotas on device /dev/loop0
+Block grace time: 7days; Inode grace time: 7days
+                        Block limits                File limits
+User            used    soft    hard  grace    used  soft  hard  grace
+----------------------------------------------------------------------
+root      --      52       0       0              6     0     0       
+lsatest_fin_alice --       8   92160  112640              2     0     0       
+lsatest_eng_eve --       8  153600  204800              2     0     0       
+lsatest_sales_grace +-   60416   51200   61440  7days       2     0     0       
+
+
+*** Report for group quotas on device /dev/loop0
+Block grace time: 7days; Inode grace time: 7days
+                        Block limits                File limits
+Group           used    soft    hard  grace    used  soft  hard  grace
+----------------------------------------------------------------------
+root      --      20       0       0              2     0     0       
+lsatest_grp_finance --      16  204800  256000              3     0     0       
+lsatest_grp_hr --       8  102400  122880              1     0     0       
+lsatest_grp_eng --      16  409600  512000              3     0     0       
+lsatest_grp_sales --   60424  102400  122880              3     0     0       
+
+

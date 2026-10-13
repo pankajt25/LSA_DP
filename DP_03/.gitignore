@@ -1,0 +1,10 @@
+# Sandbox runtime data and active mount points
+sandbox_data/
+
+# Storage disk images
+*.img
+
+# Generated test and temp data
+*.tmp
+*.swp
+.DS_Store
