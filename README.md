@@ -11,6 +11,7 @@ Comprehensive repository of enterprise-grade Linux infrastructure deployment pro
 | [**DP_01**](./DP_01/) | **Enterprise Storage Infrastructure** | Multi-disk LVM pooling, XFS/ext4 filesystems, live online volume elasticity, SetGID/POSIX ACL isolation, automated departmental backup suite with SHA-256 integrity checks, and reboot persistence. | **Completed** | `cd DP_01 && bash run.sh` | [DP_01](./DP_01/) |
 | [**DP_02**](./DP_02/) | **Centralized Backup & Recovery Server** | Centralized backup server supporting GNU tar listed-incremental full & incremental backups, daily/weekly cron automation, 2-full retention policy, cryptographic SHA-256 manifests, RBAC permissions, and disaster recovery validation. | **Completed** | `cd DP_02 && bash run.sh` | [DP_02](./DP_02/) |
 | [**DP_03**](./DP_03/) | **Department File Server** | Multi-department shared folders with ext4 kernel quotas (soft/hard user & group limits, 7-day grace period), POSIX default & access ACLs, SetGID (`2770`) inheritance, Sticky Bit (`3770`) peer deletion protection, auditor read-only governance, and automated security audit. | **Completed** | `cd DP_03 && bash run.sh` | [DP_03](./DP_03/) |
+| [**DP_04**](./DP_04/) | **Linux Disaster Recovery Solution** | LVM Copy-on-Write snapshots, point-in-time state preservation, selective granular file restoration, offline block-level rollback (`lvconvert --merge`), dynamic capacity monitoring & elastic expansion (`lvextend`), and external verified archive disaster recovery. | **Completed** | `cd DP_04 && bash run.sh` | [DP_04](./DP_04/) |
 
 ---
 
@@ -168,6 +169,66 @@ bash cleanup.sh
 - **Complete Commands Used Reference (90 Commands):** [DP_03/commands_used.md](./DP_03/commands_used.md)
 - **Comprehensive Testing Report:** [DP_03/docs/testing-report.md](./DP_03/docs/testing-report.md)
 - **Operational Execution Logs:** [DP_03/logs/fileserver.log](./DP_03/logs/fileserver.log)
+
+</details>
+
+---
+
+<details>
+<summary><strong>DP_04 — Linux Disaster Recovery Solution (Click to expand)</strong></summary>
+
+### Problem Statement
+Implement recovery mechanisms using LVM snapshots and backup archives for accidental data loss scenarios in **NovaTech Solutions** (Course: E1ITA307, Modules: IV | CO4).
+
+### Architecture Summary
+- **Storage Pool Subsystem:** Two 600 MB sparse virtual block devices attached via verified loopback (`losetup -j`) and pooled into Volume Group `lsatest_dr_vg` with 4 MiB Physical Extents.
+- **Origin Logical Volume:** Dedicated 500 MB Logical Volume `lsatest_data_lv` formatted with `ext4` and mounted at `sandbox_data/mnt/data`, reserving ~692 MB of free extents for Copy-on-Write snapshots.
+- **Protected Dataset & Cryptographic Baseline:** 105 structured demonstration files spanning Finance, HR, Engineering, and Sales with varied sizes and modes, paired with sorted SHA-256 baseline manifest `sandbox_data/baseline.manifest`.
+- **Snapshot Lifecycle & Retention:** Automated point-in-time CoW snapshot creation, active inventory listing, capacity monitoring (70% warn, 90% critical), and rotation policy retaining the 3 newest snapshots while pruning older ones.
+- **Disaster Recovery Scenarios:**
+  - **S1 Accidental File Deletion:** Read-only snapshot mount at `mnt/snap`, selective `cp -a` restore, verified against baseline manifest (0 mismatches).
+  - **S2 Accidental Overwrite / Corruption:** Bounded noise injection, single-file snapshot extraction, 100% SHA-256 hash match.
+  - **S3 Catastrophic Loss (Full Rollback):** Complete deletion of 2 department trees, offline block merge rollback via `lvconvert --merge`, remount, 0 mismatches.
+  - **S4 Capacity Exhaustion & Elastic Prevention:** Deliberate CoW overflow demonstration (`Attr I`, `100.00%`), paired with online `lvextend +40M` dynamic prevention.
+  - **S5 Loss Beyond Snapshots:** Point-in-time tarball archive created from snapshot outside the VG; origin LV and snapshots destroyed; bare-metal restore verified against baseline manifest.
+
+### Key Commands
+```bash
+# 1. Execute end-to-end disaster recovery validation, snapshot testing, and HTML report generation
+cd DP_04 && bash run.sh
+
+# 2. View live dark-themed HTML report (WSL / Windows)
+explorer.exe "$(wslpath -w report.html)"
+
+# 3. Storage lab provisioning & data seeding
+bash scripts/setup_lab.sh
+
+# 4. Snapshot creation & inventory listing
+bash scripts/snapshot_create.sh 100M
+bash scripts/snapshot_list.sh
+
+# 5. Snapshot capacity monitoring & rotation demo
+bash scripts/snapshot_monitor.sh
+bash scripts/snapshot_rotate.sh --demo
+
+# 6. Execute individual recovery scenarios
+bash scripts/scenarios/s1_file_deletion.sh
+bash scripts/scenarios/s2_overwrite_corruption.sh
+bash scripts/scenarios/s3_catastrophic_merge.sh
+bash scripts/scenarios/s4_capacity_exhaustion.sh
+bash scripts/scenarios/s5_loss_beyond_snapshots.sh
+
+# 7. Deliberate teardown of sandbox mounts, LVM objects, loop devices, and images
+bash cleanup.sh
+```
+
+### Deliverables & Reports
+- **Live HTML Audit Report:** [DP_04/report.html](./DP_04/report.html)
+- **Execution Guide & Viva Q&A (12 Questions):** [DP_04/README.md](./DP_04/README.md)
+- **Infrastructure Architecture Plan:** [DP_04/docs/infrastructure-plan.md](./DP_04/docs/infrastructure-plan.md)
+- **Disaster Recovery Validation Report:** [DP_04/docs/validation-report.md](./DP_04/docs/validation-report.md)
+- **Complete Commands Used Reference (52 Commands):** [DP_04/commands_used.md](./DP_04/commands_used.md)
+- **Operational Execution Logs:** [DP_04/logs/dr_solution.log](./DP_04/logs/dr_solution.log)
 
 </details>
 
