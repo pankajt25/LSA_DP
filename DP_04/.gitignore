@@ -1,0 +1,15 @@
+# Sandbox virtual disk images
+sandbox_data/*.img
+
+# Mount points
+sandbox_data/mnt/*
+!sandbox_data/mnt/.gitkeep
+
+# Archive store generated backups
+sandbox_data/archive_store/*
+!sandbox_data/archive_store/.gitkeep
+
+# Manifests and temporary test files
+sandbox_data/*.manifest
+sandbox_data/*.demo
+sandbox_data/*.tmp

@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disaster Recovery Infrastructure Report — DP_04</title>
+    <style>
+        :root {
+            --bg-body: #0b0f19;
+            --bg-card: #131b2e;
+            --bg-card-alt: #1a243b;
+            --border: #23314e;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --accent-blue: #38bdf8;
+            --accent-green: #22c55e;
+            --accent-red: #ef4444;
+            --accent-amber: #f59e0b;
+            --accent-purple: #a855f7;
+            --code-bg: #070b14;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 2rem 1.5rem;
+        }
+        .container { max-width: 1280px; margin: 0 auto; }
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        h1 { font-size: 1.85rem; font-weight: 700; color: #fff; letter-spacing: -0.025em; }
+        .subtitle { color: var(--text-muted); font-size: 0.95rem; margin-top: 0.35rem; }
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.65rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 9999px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .badge-success { background: rgba(34, 197, 94, 0.15); color: var(--accent-green); border: 1px solid rgba(34, 197, 94, 0.3); }
+        .badge-danger { background: rgba(239, 68, 68, 0.15); color: var(--accent-red); border: 1px solid rgba(239, 68, 68, 0.3); }
+        .badge-info { background: rgba(56, 189, 248, 0.15); color: var(--accent-blue); border: 1px solid rgba(56, 189, 248, 0.3); }
+        .badge-warn { background: rgba(245, 158, 11, 0.15); color: var(--accent-amber); border: 1px solid rgba(245, 158, 11, 0.3); }
+        
+        .meta-pill-group { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem; }
+        .meta-pill {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        .meta-pill strong { color: var(--text-main); }
+
+        .grid-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+        }
+        .card-stat {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+        }
+        .card-stat .title { font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600; letter-spacing: 0.05em; }
+        .card-stat .value { font-size: 2.1rem; font-weight: 700; color: #fff; margin: 0.35rem 0; }
+        .card-stat .desc { font-size: 0.8rem; color: var(--text-muted); }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #fff;
+            margin: 2rem 0 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .section-title::before {
+            content: "";
+            display: inline-block;
+            width: 4px;
+            height: 1.2rem;
+            background: var(--accent-blue);
+            border-radius: 2px;
+        }
+
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+        }
+        .scenario-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .scenario-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+        }
+        .scenario-header h3 { font-size: 1.05rem; font-weight: 600; color: #fff; }
+        .scenario-body { font-size: 0.88rem; color: #cbd5e1; flex-grow: 1; }
+        .scenario-body p { margin-bottom: 0.5rem; }
+        .scenario-stats {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.75rem;
+            margin-top: 0.75rem;
+            font-size: 0.82rem;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+        }
+        .stat-item { display: flex; flex-direction: column; }
+        .stat-item span:first-child { color: var(--text-muted); font-size: 0.72rem; text-transform: uppercase; }
+        .stat-item span:last-child { font-weight: 600; color: #fff; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+            margin-top: 0.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td { padding: 0.75rem 1rem; text-align: left; }
+        th { background: var(--bg-card-alt); color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid var(--border); }
+        tr:not(:last-child) td { border-bottom: 1px solid var(--border); }
+        code {
+            background: var(--code-bg);
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.82rem;
+            color: var(--accent-blue);
+        }
+
+        .terminal-panel {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.8rem;
+            color: #cbd5e1;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            max-height: 280px;
+            overflow-y: auto;
+        }
+
+        .notice-box {
+            background: rgba(245, 158, 11, 0.07);
+            border-left: 4px solid var(--accent-amber);
+            border-radius: 0 8px 8px 0;
+            padding: 1rem 1.25rem;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+            color: #e2e8f0;
+        }
+        .notice-box h4 { color: var(--accent-amber); font-weight: 600; margin-bottom: 0.35rem; }
+
+        footer {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <div>
+            <h1>Linux Disaster Recovery Solution</h1>
+            <div class="subtitle">E1ITA307 Infrastructure Project — LVM Snapshots, Rollback & Verified External Archives</div>
+            <div class="meta-pill-group">
+                <div class="meta-pill">Host: <strong>SP</strong></div>
+                <div class="meta-pill">Kernel: <strong>6.18.40.1-microsoft-standard-WSL2</strong></div>
+                <div class="meta-pill">OS: <strong>Ubuntu 26.04.1 LTS</strong></div>
+                <div class="meta-pill">Report Generated: <strong>2026-10-13 13:03:26 UTC</strong></div>
+            </div>
+        </div>
+        <div>
+            <span class="badge badge-success">Operational State</span>
+        </div>
+    </header>
+
+    <!-- Top Summary Cards -->
+    <div class="grid-summary">
+        <div class="card-stat">
+            <span class="title">Scenarios Validated</span>
+            <span class="value" style="color: var(--accent-green);">5 / 5</span>
+            <span class="desc">100% Automated Test Suite Passing</span>
+        </div>
+        <div class="card-stat">
+            <span class="title">Snapshots Tested</span>
+            <span class="value" style="color: var(--accent-blue);">40</span>
+            <span class="desc">CoW Snapshots Provisioned & Managed</span>
+        </div>
+        <div class="card-stat">
+            <span class="title">Archives Verified</span>
+            <span class="value" style="color: var(--accent-purple);">1</span>
+            <span class="desc">Off-Pool Point-in-Time Backups</span>
+        </div>
+        <div class="card-stat">
+            <span class="title">Data Mismatches</span>
+            <span class="value" style="color: var(--accent-green);">0</span>
+            <span class="desc">Cryptographic Bit-Level Parity</span>
+        </div>
+    </div>
+
+    <!-- Live LVM Storage Infrastructure Panel -->
+    <div class="section-title">Live Storage Architecture & Pooling Status</div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+        <div>
+            <div style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.35rem; font-weight:600;">Physical Volumes (pvs)</div>
+            <div class="terminal-panel" style="max-height: 120px;">  PV         VG            PSize   PFree  
+  /dev/loop0 lsatest_dr_vg 596.00m  96.00m
+  /dev/loop1 lsatest_dr_vg 596.00m 596.00m</div>
+        </div>
+        <div>
+            <div style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.35rem; font-weight:600;">Volume Group Pool (vgs)</div>
+            <div class="terminal-panel" style="max-height: 120px;">  VG            #PV #LV VSize VFree  
+  lsatest_dr_vg   2   1 1.16g 692.00m</div>
+        </div>
+        <div>
+            <div style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.35rem; font-weight:600;">Logical Volumes (lvs)</div>
+            <div class="terminal-panel" style="max-height: 120px;">  LV              VG            LSize   Attr       Data% 
+  lsatest_data_lv lsatest_dr_vg 500.00m -wi-ao----       </div>
+        </div>
+    </div>
+
+    <!-- Scenario Cards -->
+    <div class="section-title">Disaster Recovery Scenario Evaluations</div>
+    <div class="scenario-grid">
+        <!-- Scenario 1 -->
+        <div class="scenario-card">
+            <div>
+                <div class="scenario-header">
+                    <h3>S1: Accidental File Deletion</h3>
+                    <span class="badge badge-success">PASS</span>
+                </div>
+                <div class="scenario-body">
+                    <p><strong>Disaster:</strong> Accidental deletion of 5 departmental files across Finance, HR, Eng, Sales</p>
+                    <p><strong>Recovery:</strong> Read-Only Snapshot Mount & Selective File Restore (cp -a)</p>
+                </div>
+            </div>
+            <div class="scenario-stats">
+                <div class="stat-item"><span>Data Loss Window</span><span>3s</span></div>
+                <div class="stat-item"><span>Recovery Time</span><span>0s</span></div>
+                <div class="stat-item"><span>Files Verified</span><span>105 / 105</span></div>
+                <div class="stat-item"><span>Mismatches</span><span>0</span></div>
+            </div>
+        </div>
+
+        <!-- Scenario 2 -->
+        <div class="scenario-card">
+            <div>
+                <div class="scenario-header">
+                    <h3>S2: Accidental Overwrite or Corruption</h3>
+                    <span class="badge badge-success">PASS</span>
+                </div>
+                <div class="scenario-body">
+                    <p><strong>Disaster:</strong> Targeted overwrite and bit corruption of finance/ledger_entry_12.csv with bounded random payload</p>
+                    <p><strong>Recovery:</strong> Read-Only Snapshot Mount & Targeted Single File Restore (cp -a)</p>
+                </div>
+            </div>
+            <div class="scenario-stats">
+                <div class="stat-item"><span>Data Loss Window</span><span>4s</span></div>
+                <div class="stat-item"><span>Recovery Time</span><span>0s</span></div>
+                <div class="stat-item"><span>Files Verified</span><span>105 / 105</span></div>
+                <div class="stat-item"><span>Mismatches</span><span>0</span></div>
+            </div>
+        </div>
+
+        <!-- Scenario 3 -->
+        <div class="scenario-card">
+            <div>
+                <div class="scenario-header">
+                    <h3>S3: Catastrophic Loss with Full Rollback</h3>
+                    <span class="badge badge-success">PASS</span>
+                </div>
+                <div class="scenario-body">
+                    <p><strong>Disaster:</strong> Catastrophic recursive deletion of 2 entire departments (engineering/ and sales/)</p>
+                    <p><strong>Recovery:</strong> Full Block-Level Snapshot Rollback (lvconvert --merge offline)</p>
+                </div>
+            </div>
+            <div class="scenario-stats">
+                <div class="stat-item"><span>Data Loss Window</span><span>5s</span></div>
+                <div class="stat-item"><span>Recovery Time</span><span>33s</span></div>
+                <div class="stat-item"><span>Files Verified</span><span>105 / 105</span></div>
+                <div class="stat-item"><span>Mismatches</span><span>0</span></div>
+            </div>
+        </div>
+
+        <!-- Scenario 4 -->
+        <div class="scenario-card">
+            <div>
+                <div class="scenario-header">
+                    <h3>S4: Snapshot Capacity Exhaustion & Prevention</h3>
+                    <span class="badge badge-success">PASS</span>
+                </div>
+                <div class="scenario-body">
+                    <p><strong>Disaster:</strong> Origin block churn (25M) exceeding 16M snapshot CoW table capacity</p>
+                    <p><strong>Recovery:</strong> Invalidation Detection (Attr 'I') & Online Dynamic Expansion (lvextend +40M)</p>
+                </div>
+            </div>
+            <div class="scenario-stats">
+                <div class="stat-item"><span>Overflow Attr</span><span><code>swi-I-s---</code></span></div>
+                <div class="stat-item"><span>Overflow Data%</span><span>100.00%</span></div>
+                <div class="stat-item"><span>Dynamic Extend</span><span>20.00m &rarr; 60.00m</span></div>
+                <div class="stat-item"><span>Post-Extend Data%</span><span>16.86%</span></div>
+            </div>
+        </div>
+
+        <!-- Scenario 5 -->
+        <div class="scenario-card">
+            <div>
+                <div class="scenario-header">
+                    <h3>S5: Loss Beyond Snapshots (Why Snapshots != Backups)</h3>
+                    <span class="badge badge-success">PASS</span>
+                </div>
+                <div class="scenario-body">
+                    <p><strong>Disaster:</strong> Total volume destruction: origin LV and all snapshots destroyed</p>
+                    <p><strong>Recovery:</strong> External Point-in-Time Tarball Archive Restoration (Outside VG)</p>
+                </div>
+            </div>
+            <div class="scenario-stats">
+                <div class="stat-item"><span>Data Loss Window</span><span>5s</span></div>
+                <div class="stat-item"><span>Recovery Time</span><span>2s</span></div>
+                <div class="stat-item"><span>Files Verified</span><span>105 / 105</span></div>
+                <div class="stat-item"><span>Mismatches</span><span>0</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Snapshot Inventory -->
+    <div class="section-title">Active Snapshot Inventory (Volume Group: lsatest_dr_vg)</div>
+    <table>
+        <thead>
+            <tr>
+                <th>Snapshot Name</th>
+                <th>Origin LV</th>
+                <th>Size</th>
+                <th>Data% Used</th>
+                <th>Attributes</th>
+                <th>Creation Timestamp</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td colspan='6' style='text-align:center; color:#94a3b8;'>(Snapshots consumed by rollbacks or safely cleaned up post-test)</td></tr>
+        </tbody>
+    </table>
+
+    <!-- External Archive Inventory -->
+    <div class="section-title">External Archive Inventory (sandbox_data/archive_store/)</div>
+    <table>
+        <thead>
+            <tr>
+                <th>Archive Filename</th>
+                <th>Size</th>
+                <th>SHA-256 Digest</th>
+                <th>Health Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td><code>data_20261013_183244.tar.gz</code></td><td>26K</td><td><code style='font-size:0.75rem;'>8250d16cb3babdf7e6a3e737048514328134f8b773bae044fdd4d23e8f0e3edb</code></td><td><span class='badge badge-success'>Verified (SHA-256)</span></td></tr>
+        </tbody>
+    </table>
+
+    <!-- Architecture & Limits of Snapshots Callout -->
+    <div class="notice-box">
+        <h4>Architectural Guardrail: The Inherent Boundaries of LVM Snapshots</h4>
+        <p>LVM snapshots provide exceptional near-zero RTO for logical failures and accidental deletions. However, <strong>snapshots are not independent backups</strong>:</p>
+        <ul style="margin: 0.5rem 0 0 1.25rem; font-size: 0.88rem;">
+            <li><strong>Origin Co-dependency:</strong> Classic copy-on-write snapshots store only modified delta blocks. Total failure or deletion of the origin volume destroys all child snapshots instantly.</li>
+            <li><strong>Storage Saturation Invalidation:</strong> An unmonitored snapshot that reaches 100% capacity becomes permanently invalid (attribute <code>I</code>) and cannot be recovered.</li>
+            <li><strong>Offline Rollback Requirement:</strong> Full rollback via <code>lvconvert --merge</code> alters the block allocation table directly and requires unmounting the origin filesystem to prevent metadata corruption.</li>
+            <li><strong>True Disaster Protection:</strong> Disaster recovery across hardware failures or volume group loss requires immutable archive backups exported outside the volume group (as proven in Scenario 5).</li>
+        </ul>
+    </div>
+
+    <!-- Execution Log Tail -->
+    <div class="section-title">Operational Audit Log Tail (logs/dr_solution.log)</div>
+    <div class="terminal-panel">[2026-10-13 18:33:04] [INFO] SUDO EXECUTION [Target Sandbox]: Create CoW snapshot lsatest_snap_rot3
+[2026-10-13 18:33:04] [SUDO_CMD] Create CoW snapshot lsatest_snap_rot3 -> lvcreate -s -n lsatest_snap_rot3 -L 10M lsatest_dr_vg/lsatest_data_lv
+[2026-10-13 18:33:05] [SUCCESS] Snapshot 'lsatest_snap_rot3' created in 0s.
+[2026-10-13 18:33:06] [INFO] Creating snapshot 4/5: lsatest_snap_rot4 (10M)...
+[2026-10-13 18:33:06] [INFO] Creating LVM snapshot 'lsatest_snap_rot4' (Allocated Size: 10M)...
+[2026-10-13 18:33:06] [INFO] Flushing filesystem buffers (sync)...
+[2026-10-13 18:33:06] [INFO] SUDO EXECUTION [Target Sandbox]: Create CoW snapshot lsatest_snap_rot4
+[2026-10-13 18:33:06] [SUDO_CMD] Create CoW snapshot lsatest_snap_rot4 -> lvcreate -s -n lsatest_snap_rot4 -L 10M lsatest_dr_vg/lsatest_data_lv
+[2026-10-13 18:33:07] [SUCCESS] Snapshot 'lsatest_snap_rot4' created in 1s.
+[2026-10-13 18:33:08] [INFO] Creating snapshot 5/5: lsatest_snap_rot5 (10M)...
+[2026-10-13 18:33:08] [INFO] Creating LVM snapshot 'lsatest_snap_rot5' (Allocated Size: 10M)...
+[2026-10-13 18:33:08] [INFO] Flushing filesystem buffers (sync)...
+[2026-10-13 18:33:14] [INFO] SUDO EXECUTION [Target Sandbox]: Create CoW snapshot lsatest_snap_rot5
+[2026-10-13 18:33:14] [SUDO_CMD] Create CoW snapshot lsatest_snap_rot5 -> lvcreate -s -n lsatest_snap_rot5 -L 10M lsatest_dr_vg/lsatest_data_lv
+[2026-10-13 18:33:15] [SUCCESS] Snapshot 'lsatest_snap_rot5' created in 1s.
+[2026-10-13 18:33:16] [INFO] Step 2: Listing all snapshots before rotation (expect 5):
+[2026-10-13 18:33:17] [INFO] Step 3: Running rotation to retain newest 3 snapshots...
+[2026-10-13 18:33:17] [INFO] Evaluating snapshot retention policy: Keeping newest 3 snapshot(s)...
+[2026-10-13 18:33:17] [INFO] Found 5 active snapshot(s) in lsatest_dr_vg.
+[2026-10-13 18:33:17] [INFO] Pruning 2 expired snapshot(s) to enforce retention limit (3)...
+[2026-10-13 18:33:17] [INFO] Target for pruning: lsatest_snap_rot1
+[2026-10-13 18:33:17] [INFO] Removing Logical Volume: /dev/lsatest_dr_vg/lsatest_snap_rot1
+[2026-10-13 18:33:17] [INFO] SUDO EXECUTION [Target Sandbox]: Remove Logical Volume /dev/lsatest_dr_vg/lsatest_snap_rot1
+[2026-10-13 18:33:17] [SUDO_CMD] Remove Logical Volume /dev/lsatest_dr_vg/lsatest_snap_rot1 -> lvremove -y /dev/lsatest_dr_vg/lsatest_snap_rot1
+[2026-10-13 18:33:18] [INFO] Target for pruning: lsatest_snap_rot2
+[2026-10-13 18:33:18] [INFO] Removing Logical Volume: /dev/lsatest_dr_vg/lsatest_snap_rot2
+[2026-10-13 18:33:19] [INFO] SUDO EXECUTION [Target Sandbox]: Remove Logical Volume /dev/lsatest_dr_vg/lsatest_snap_rot2
+[2026-10-13 18:33:19] [SUDO_CMD] Remove Logical Volume /dev/lsatest_dr_vg/lsatest_snap_rot2 -> lvremove -y /dev/lsatest_dr_vg/lsatest_snap_rot2
+[2026-10-13 18:33:21] [SUCCESS] Snapshot rotation complete. Retained newest 3 snapshot(s).
+[2026-10-13 18:33:21] [INFO] Step 4: Listing snapshots post-rotation (expect exactly 3: rot3, rot4, rot5):
+[2026-10-13 18:33:21] [SUCCESS] Rotation demonstration PASSED: Successfully pruned 2 oldest and retained 3 newest.
+[2026-10-13 18:33:21] [INFO] Cleaning up rotation demonstration snapshots...
+[2026-10-13 18:33:22] [INFO] Removing Logical Volume: /dev/lsatest_dr_vg/lsatest_snap_rot3
+[2026-10-13 18:33:22] [INFO] SUDO EXECUTION [Target Sandbox]: Remove Logical Volume /dev/lsatest_dr_vg/lsatest_snap_rot3
+[2026-10-13 18:33:22] [SUDO_CMD] Remove Logical Volume /dev/lsatest_dr_vg/lsatest_snap_rot3 -> lvremove -y /dev/lsatest_dr_vg/lsatest_snap_rot3
+[2026-10-13 18:33:22] [INFO] Removing Logical Volume: /dev/lsatest_dr_vg/lsatest_snap_rot4
+[2026-10-13 18:33:22] [INFO] SUDO EXECUTION [Target Sandbox]: Remove Logical Volume /dev/lsatest_dr_vg/lsatest_snap_rot4
+[2026-10-13 18:33:22] [SUDO_CMD] Remove Logical Volume /dev/lsatest_dr_vg/lsatest_snap_rot4 -> lvremove -y /dev/lsatest_dr_vg/lsatest_snap_rot4
+[2026-10-13 18:33:23] [INFO] Removing Logical Volume: /dev/lsatest_dr_vg/lsatest_snap_rot5
+[2026-10-13 18:33:23] [INFO] SUDO EXECUTION [Target Sandbox]: Remove Logical Volume /dev/lsatest_dr_vg/lsatest_snap_rot5
+[2026-10-13 18:33:23] [SUDO_CMD] Remove Logical Volume /dev/lsatest_dr_vg/lsatest_snap_rot5 -> lvremove -y /dev/lsatest_dr_vg/lsatest_snap_rot5
+[2026-10-13 18:33:23] [INFO] === [Phase 4] Generating Disaster Recovery Validation Report ===
+[2026-10-13 18:33:25] [SUCCESS] Disaster Recovery Validation Report generated: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_04/docs/validation-report.md
+[2026-10-13 18:33:25] [INFO] === [Phase 4] Regenerating Live HTML Audit Report ===
+[2026-10-13 18:33:25] [INFO] Generating live self-contained HTML audit report: /mnt/d/Users/Dell/Downloads/Projects/LSA/Deployment_Projects/DP_04/report.html...</div>
+
+    <footer>
+        <p>NovaTech Solutions Disaster Recovery Platform &bull; Linux System Administration (E1ITA307) &bull; Verified Sandbox Execution</p>
+    </footer>
+</div>
+</body>
+</html>
